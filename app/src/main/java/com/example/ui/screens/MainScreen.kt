@@ -31,6 +31,7 @@ import androidx.compose.material.icons.filled.Tune
 import androidx.compose.material.icons.outlined.AutoAwesomeMotion
 import androidx.compose.material.icons.outlined.AutoStories
 import androidx.compose.material.icons.outlined.Tune
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -41,7 +42,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -105,9 +105,7 @@ fun MainScreen(viewModel: MainViewModel) {
                 },
                 navigationIcon = {
                     IconButton(
-                        onClick = {
-                            if (currentTab == NavigationTab.Reading) currentTab = NavigationTab.Library
-                        },
+                        onClick = { if (currentTab == NavigationTab.Reading) currentTab = NavigationTab.Library },
                         modifier = Modifier.testTag("scaffold_nav_icon")
                     ) {
                         Icon(
@@ -157,24 +155,14 @@ fun MainScreen(viewModel: MainViewModel) {
                         NavigationTabInfo(NavigationTab.Notes, "Knowledge", Icons.Outlined.AutoAwesomeMotion, Icons.Filled.AutoAwesomeMotion, "tab_notes"),
                         NavigationTabInfo(NavigationTab.Settings, "Settings", Icons.Outlined.Tune, Icons.Filled.Tune, "tab_settings")
                     )
-                    tabs.forEach { tab ->
-                        BottomTab(tab, currentTab == tab.tab) { currentTab = tab.tab }
-                    }
+                    tabs.forEach { tab -> BottomTab(tab, currentTab == tab.tab) { currentTab = tab.tab } }
                 }
             }
-        },
-        contentWindowInsets = WindowInsets.safeDrawing
+        }
     ) { innerPadding ->
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(top = innerPadding.calculateTopPadding(), bottom = innerPadding.calculateBottomPadding())
-        ) {
+        Box(modifier = Modifier.fillMaxSize().padding(innerPadding)) {
             when (currentTab) {
-                NavigationTab.Library -> LibraryScreen(
-                    viewModel = viewModel,
-                    onNavigateToReader = { currentTab = NavigationTab.Reading }
-                )
+                NavigationTab.Library -> LibraryScreen(viewModel = viewModel, onNavigateToReader = { currentTab = NavigationTab.Reading })
                 NavigationTab.Reading -> ReaderScreen(viewModel)
                 NavigationTab.Notes -> NotesScreen(viewModel)
                 NavigationTab.Settings -> SettingsScreen(viewModel)
