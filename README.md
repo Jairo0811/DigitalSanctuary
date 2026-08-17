@@ -48,7 +48,7 @@ Digital Sanctuary fue desarrollado como proyecto académico individual por **Fra
 
 El profesor **Ing. Pedro José Ramirez Rodriguez** aparece en dos momentos distintos de la trayectoria académica documentada en UNAPEC: primero en **Bases de Datos 1 (INF-164)**, donde surgió el prototipo que posteriormente evolucionó hacia NutriFlow, y dos años después en **Desarrollo de Software con Tecnología Propietaria 2 (ISO-710)** con Digital Sanctuary.
 
-| Orden | Asignatura | Proyecto | Período | Profesor recurrente |
+| Orden | Asignatura | Proyecto | Período | Profesor |
 |---:|---|---|---|---|
 | 1 | Bases de Datos 1 (INF-164) | [**NutriFlow**](https://github.com/Jairo0811/NutriFlow) | Mayo - Agosto 2024 | **Ing. Pedro José Ramirez Rodriguez** |
 | 2 | Desarrollo de Software con Tecnología Propietaria 2 (ISO-710) | **Digital Sanctuary** | Mayo - Agosto 2026 | **Ing. Pedro José Ramirez Rodriguez** |
