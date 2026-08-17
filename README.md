@@ -8,13 +8,14 @@
   <img src="https://img.shields.io/badge/UNAPEC-ISO--710-003B70?style=for-the-badge" alt="UNAPEC ISO-710">
   <img src="https://img.shields.io/badge/Estado-En%20desarrollo-F5A623?style=for-the-badge" alt="Estado en desarrollo">
   <img src="https://img.shields.io/badge/Plataforma-Android-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Android">
+  <img src="https://img.shields.io/badge/Prototipado-Google%20AI%20Studio-4285F4?style=for-the-badge&logo=google&logoColor=white" alt="Google AI Studio">
 </p>
 
 <p align="center">
-  <strong>Kotlin · Jetpack Compose · Room · Material 3 · Coroutines</strong>
+  <strong>Google AI Studio · Kotlin · Jetpack Compose · Room · Material 3 · Coroutines</strong>
 </p>
 
-> 🎓 **Origen académico:** Digital Sanctuary nace como un **prototipo académico** desarrollado durante la asignatura **Desarrollo de Software con Tecnología Propietaria 2 (ISO-710)** de la **Universidad APEC (UNAPEC)**, en el período **Mayo - Agosto 2026**. La entrega académica original representaba la idea, experiencia y pantallas del producto; la etapa actual convierte ese prototipo en una aplicación Android funcional.
+> 🎓 **Origen académico:** Digital Sanctuary nace como un **prototipo académico creado con Google AI Studio** durante la asignatura **Desarrollo de Software con Tecnología Propietaria 2 (ISO-710)** de la **Universidad APEC (UNAPEC)**, en el período **Mayo - Agosto 2026**. Google AI Studio fue utilizado como herramienta de generación y prototipado asistido por inteligencia artificial para materializar la propuesta inicial. La etapa actual toma esa base y la evoluciona hacia una aplicación Android funcional, mantenible y verificable.
 
 ---
 
@@ -24,7 +25,9 @@
 
 El concepto combina elementos de un lector digital, un gestor de biblioteca y un sistema de Personal Knowledge Management (PKM).
 
-La evolución actual busca transformar el prototipo académico en software real mediante una implementación nativa para Android con persistencia local, navegación, gestión de notas, seguimiento de progreso y una experiencia visual inspirada en lectores e-ink.
+La primera materialización técnica del concepto fue generada y prototipada mediante **Google AI Studio**. El repositorio conserva esa procedencia tecnológica: la base Android inicial y su estructura fueron posteriormente trasladadas a GitHub para continuar el desarrollo como un proyecto de software convencional, aplicando control de versiones, CI, pruebas, persistencia y evolución incremental.
+
+La implementación actual utiliza Android nativo con Kotlin y Jetpack Compose. El objetivo ya no es únicamente demostrar visualmente el concepto, sino convertir el prototipo generado con asistencia de IA en software real y mantenible.
 
 ---
 
@@ -35,23 +38,25 @@ La evolución actual busca transformar el prototipo académico en software real 
         │
         ├── Concepto de producto
         ├── Diseño de experiencia
-        └── Prototipo académico
+        ├── Google AI Studio
+        └── Prototipo generado con asistencia de IA
                 │
-                │ Sin producto final funcional
                 ▼
-2026 — Digital Sanctuary
+2026 — Digital Sanctuary · Evolución
         │
+        ├── Código fuente versionado en GitHub
         ├── Kotlin
         ├── Jetpack Compose
-        ├── Room
+        ├── Room / SQLite
         ├── Material 3
+        ├── Pruebas automatizadas
         └── GitHub Actions
                 │
                 ▼
         Aplicación Android funcional
 ```
 
-Esta separación permite conservar el valor histórico del trabajo universitario sin atribuirle funcionalidades que todavía no estaban implementadas en la entrega original.
+Esta separación conserva la procedencia del prototipo y permite distinguir entre la generación inicial realizada mediante Google AI Studio y el trabajo de ingeniería aplicado posteriormente para convertirlo en una aplicación funcional.
 
 ---
 
@@ -65,7 +70,8 @@ Esta separación permite conservar el valor histórico del trabajo universitario
 | 👨‍🏫 Profesor | Ing. Pedro José Ramirez Rodriguez |
 | 🏫 Institución | Universidad APEC (UNAPEC) |
 | 📅 Período académico | Mayo - Agosto 2026 |
-| 📁 Entrega original | Prototipo académico |
+| 🤖 Herramienta de prototipado | Google AI Studio |
+| 📁 Entrega original | Prototipo académico generado con asistencia de IA |
 | 📱 Implementación actual | Aplicación Android funcional en desarrollo |
 
 ---
@@ -116,35 +122,62 @@ Libro → Lectura → Anotación → Insight → Nota → Conocimiento
 - exportación de notas;
 - mejoras de accesibilidad;
 - modo e-ink avanzado;
-- integración opcional de IA para resúmenes, explicación de fragmentos y generación de insights.
+- integración opcional de Gemini para resúmenes, explicación de fragmentos y generación de insights.
 
 ---
 
 ## 🧱 Stack tecnológico
 
-| Área | Tecnología |
-|---|---|
-| Plataforma | Android |
-| Lenguaje | Kotlin |
-| UI | Jetpack Compose |
-| Design System | Material 3 |
-| Persistencia | Room / SQLite |
-| Estado | ViewModel + StateFlow |
-| Asincronía | Kotlin Coroutines |
-| Imágenes | Coil |
-| Networking preparado | Retrofit + OkHttp + Moshi |
-| Pruebas | JUnit, Robolectric, Compose UI Test, Roborazzi |
-| CI | GitHub Actions |
+Digital Sanctuary combina herramientas de **IA generativa para prototipado** con un stack Android nativo para su implementación y evolución como producto.
+
+| Área | Tecnología | Uso en el proyecto |
+|---|---|---|
+| Generación y prototipado asistido por IA | **Google AI Studio** | Creación y materialización inicial del prototipo académico |
+| IA generativa | **Google Gemini / Gemini API (prevista)** | Base tecnológica asociada a AI Studio; integración funcional de IA planificada |
+| Plataforma | **Android** | Plataforma móvil objetivo |
+| Lenguaje | **Kotlin** | Lenguaje principal de la aplicación |
+| UI declarativa | **Jetpack Compose** | Construcción de pantallas y componentes |
+| Design System | **Material 3** | Componentes y fundamentos visuales |
+| Persistencia | **Room + SQLite** | Biblioteca, anotaciones y configuración local |
+| Arquitectura de estado | **ViewModel + StateFlow** | Estado reactivo de la interfaz |
+| Asincronía | **Kotlin Coroutines** | Operaciones asíncronas y acceso a datos |
+| Carga de imágenes | **Coil** | Portadas e imágenes remotas |
+| Networking | **Retrofit + OkHttp** | Infraestructura HTTP preparada para servicios externos |
+| Serialización | **Moshi** | Conversión JSON para integraciones HTTP |
+| Procesamiento de anotaciones Room | **KSP** | Generación de código en tiempo de compilación |
+| Pruebas unitarias | **JUnit + Robolectric** | Validación de lógica Android/JVM |
+| Pruebas de interfaz | **Compose UI Test** | Validación de componentes Compose |
+| Pruebas visuales | **Roborazzi** | Capturas y regresión visual |
+| Automatización | **Gradle** | Build, dependencias y tareas del proyecto |
+| Integración continua | **GitHub Actions** | Validación automática del build y pruebas |
+| Control de versiones | **Git + GitHub** | Evolución y trazabilidad del código fuente |
+
+### Papel de Google AI Studio
+
+**Google AI Studio forma parte del origen tecnológico del proyecto**, pero no sustituye el stack de ejecución de la aplicación. Su función inicial fue servir como entorno de generación/prototipado asistido por IA. El producto resultante se está transformando en un proyecto Android convencional cuya ejecución depende de Kotlin, Jetpack Compose, Room y el resto del ecosistema Android.
+
+Esto permite describir correctamente el proyecto como:
+
+> **Prototipado y generación inicial con Google AI Studio + desarrollo Android nativo con Kotlin y Jetpack Compose.**
+
+La capacidad de IA contextual mediante Gemini se considera una fase posterior. No se presenta como una funcionalidad productiva mientras su integración no esté implementada y validada.
 
 ---
 
 ## 🏗️ Arquitectura actual
 
 ```text
+Google AI Studio
+  (prototipo inicial)
+        │
+        ▼
+Código Android versionado
+        │
+        ▼
 Jetpack Compose UI
         │
         ▼
-MainViewModel
+MainViewModel / StateFlow
         │
         ▼
 Repository
@@ -192,7 +225,8 @@ Digital Sanctuary se encuentra en **Fase 1 — Stabilization**.
 
 | Componente | Estado |
 |---|:---:|
-| Prototipo académico original | ✅ |
+| Prototipo académico en Google AI Studio | ✅ |
+| Código Android trasladado/versionado en GitHub | ✅ |
 | Proyecto Android nativo | ✅ |
 | Kotlin + Jetpack Compose | ✅ |
 | Biblioteca local | ✅ |
@@ -206,7 +240,7 @@ Digital Sanctuary se encuentra en **Fase 1 — Stabilization**.
 | Importación EPUB/PDF | ⏳ |
 | Reader de contenido real | ⏳ |
 | Knowledge Graph / relaciones | ⏳ |
-| IA contextual | ⏳ |
+| Integración funcional con Gemini | ⏳ |
 
 > **Leyenda:** ✅ disponible · 🔄 en progreso · ⏳ planificado
 
@@ -216,11 +250,12 @@ Digital Sanctuary se encuentra en **Fase 1 — Stabilization**.
 
 ### Fase 1 — Stabilization
 
+- [x] Prototipo inicial mediante Google AI Studio.
 - [x] Estructura Android base.
 - [x] Persistencia local con Room.
 - [x] Navegación principal.
 - [x] Gestión inicial de biblioteca y notas.
-- [x] Documentar origen académico.
+- [x] Documentar origen académico y tecnológico.
 - [ ] Validar build limpio en CI.
 - [ ] Sustituir namespace de plantilla.
 - [ ] Integrar identidad visual definitiva.
@@ -251,20 +286,22 @@ Digital Sanctuary se encuentra en **Fase 1 — Stabilization**.
 - [ ] Búsqueda global.
 - [ ] Exportación de conocimiento.
 
-### Fase 5 — AI Assistance
+### Fase 5 — Gemini AI Assistance
 
+- [ ] Definir integración segura con Gemini API.
 - [ ] Resumir fragmentos.
 - [ ] Explicar conceptos.
 - [ ] Generar insights sugeridos.
 - [ ] Consultar notas y biblioteca de forma contextual.
+- [ ] Mantener claves y credenciales fuera del cliente cuando corresponda.
 
 ---
 
 ## 📌 Nota sobre el alcance académico
 
-Digital Sanctuary **no se presenta como una aplicación completamente funcional desarrollada durante la asignatura ISO-710**. El proyecto universitario original fue un prototipo. La implementación Android funcional corresponde a la evolución posterior del concepto.
+Digital Sanctuary **no se presenta como una aplicación completamente funcional desarrollada durante la asignatura ISO-710**. La entrega universitaria fue un prototipo creado con asistencia de **Google AI Studio**. La implementación Android funcional corresponde a la evolución posterior del concepto.
 
-Esta distinción se mantiene explícitamente para preservar la trazabilidad académica y técnica del proyecto.
+Esta distinción mantiene explícita tanto la trazabilidad académica como la procedencia de las herramientas de IA utilizadas en la creación del prototipo.
 
 ---
 
