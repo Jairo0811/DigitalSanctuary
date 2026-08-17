@@ -128,39 +128,110 @@ Libro → Lectura → Anotación → Insight → Nota → Conocimiento
 
 ## 🧱 Stack tecnológico
 
-Digital Sanctuary combina herramientas de **IA generativa para prototipado** con un stack Android nativo para su implementación y evolución como producto.
+### 🤖 IA generativa y prototipado
 
-| Área | Tecnología | Uso en el proyecto |
-|---|---|---|
-| Generación y prototipado asistido por IA | **Google AI Studio** | Creación y materialización inicial del prototipo académico |
-| IA generativa | **Google Gemini / Gemini API (prevista)** | Base tecnológica asociada a AI Studio; integración funcional de IA planificada |
-| Plataforma | **Android** | Plataforma móvil objetivo |
-| Lenguaje | **Kotlin** | Lenguaje principal de la aplicación |
-| UI declarativa | **Jetpack Compose** | Construcción de pantallas y componentes |
-| Design System | **Material 3** | Componentes y fundamentos visuales |
-| Persistencia | **Room + SQLite** | Biblioteca, anotaciones y configuración local |
-| Arquitectura de estado | **ViewModel + StateFlow** | Estado reactivo de la interfaz |
-| Asincronía | **Kotlin Coroutines** | Operaciones asíncronas y acceso a datos |
-| Carga de imágenes | **Coil** | Portadas e imágenes remotas |
-| Networking | **Retrofit + OkHttp** | Infraestructura HTTP preparada para servicios externos |
-| Serialización | **Moshi** | Conversión JSON para integraciones HTTP |
-| Procesamiento de anotaciones Room | **KSP** | Generación de código en tiempo de compilación |
-| Pruebas unitarias | **JUnit + Robolectric** | Validación de lógica Android/JVM |
-| Pruebas de interfaz | **Compose UI Test** | Validación de componentes Compose |
-| Pruebas visuales | **Roborazzi** | Capturas y regresión visual |
-| Automatización | **Gradle** | Build, dependencias y tareas del proyecto |
-| Integración continua | **GitHub Actions** | Validación automática del build y pruebas |
-| Control de versiones | **Git + GitHub** | Evolución y trazabilidad del código fuente |
+<p>
+  <img src="https://img.shields.io/badge/Google%20AI%20Studio-Prototipado%20con%20IA-4285F4?style=for-the-badge&logo=google&logoColor=white" alt="Google AI Studio" />
+  <img src="https://img.shields.io/badge/Google%20Gemini-IA%20Generativa-8E75B2?style=for-the-badge&logo=googlegemini&logoColor=white" alt="Google Gemini" />
+</p>
 
-### Papel de Google AI Studio
+- **Google AI Studio:** entorno utilizado para crear y materializar el prototipo académico inicial.
+- **Google Gemini:** tecnología de IA asociada al entorno de prototipado; su integración funcional se contempla para una fase posterior.
+- **Gemini API:** prevista para resúmenes, explicación contextual y generación asistida de insights, una vez implementada de forma segura.
 
-**Google AI Studio forma parte del origen tecnológico del proyecto**, pero no sustituye el stack de ejecución de la aplicación. Su función inicial fue servir como entorno de generación/prototipado asistido por IA. El producto resultante se está transformando en un proyecto Android convencional cuya ejecución depende de Kotlin, Jetpack Compose, Room y el resto del ecosistema Android.
+### 📱 Aplicación Android y experiencia de usuario
 
-Esto permite describir correctamente el proyecto como:
+<p>
+  <img src="https://skillicons.dev/icons?i=kotlin,androidstudio" alt="Kotlin y Android Studio" />
+  <img src="https://img.shields.io/badge/Jetpack%20Compose-UI%20Declarativa-4285F4?style=flat-square&logo=jetpackcompose&logoColor=white" alt="Jetpack Compose" />
+  <img src="https://img.shields.io/badge/Material%203-Design%20System-6750A4?style=flat-square&logo=materialdesign&logoColor=white" alt="Material 3" />
+</p>
+
+- **Android:** plataforma móvil objetivo.
+- **Kotlin:** lenguaje principal de la aplicación.
+- **Jetpack Compose:** construcción declarativa de pantallas y componentes.
+- **Material 3:** sistema de diseño y componentes visuales.
+- **Android Studio:** entorno principal para desarrollo, ejecución y depuración.
+
+### 🧠 Estado, arquitectura y asincronía
+
+<p>
+  <img src="https://img.shields.io/badge/ViewModel-Arquitectura-3F51B5?style=flat-square&logo=android&logoColor=white" alt="Android ViewModel" />
+  <img src="https://img.shields.io/badge/StateFlow-Estado%20reactivo-7F52FF?style=flat-square&logo=kotlin&logoColor=white" alt="StateFlow" />
+  <img src="https://img.shields.io/badge/Coroutines-Asincronía-7F52FF?style=flat-square&logo=kotlin&logoColor=white" alt="Kotlin Coroutines" />
+</p>
+
+- **ViewModel:** separación de estado y lógica respecto de la interfaz.
+- **StateFlow:** exposición reactiva del estado hacia Compose.
+- **Kotlin Coroutines:** ejecución de operaciones asíncronas y acceso a datos fuera del hilo principal.
+- **Repository Pattern:** capa intermedia entre la UI/ViewModel y la persistencia local.
+
+### 🗄️ Persistencia local
+
+<p>
+  <img src="https://skillicons.dev/icons?i=sqlite" alt="SQLite" />
+  <img src="https://img.shields.io/badge/Room-Persistence%20Library-3DDC84?style=flat-square&logo=android&logoColor=white" alt="Room" />
+  <img src="https://img.shields.io/badge/KSP-Code%20Generation-7F52FF?style=flat-square&logo=kotlin&logoColor=white" alt="KSP" />
+</p>
+
+- **Room:** capa de persistencia local y acceso tipado a datos.
+- **SQLite:** motor de base de datos embebido utilizado por Room.
+- **KSP:** procesamiento y generación de código para anotaciones de Room y otras dependencias compatibles.
+
+### 🌐 Networking, imágenes y serialización
+
+<p>
+  <img src="https://img.shields.io/badge/Retrofit-HTTP%20Client-48B983?style=flat-square" alt="Retrofit" />
+  <img src="https://img.shields.io/badge/OkHttp-Networking-3E4348?style=flat-square" alt="OkHttp" />
+  <img src="https://img.shields.io/badge/Moshi-JSON-EF6C00?style=flat-square" alt="Moshi" />
+  <img src="https://img.shields.io/badge/Coil-Image%20Loading-00A8E8?style=flat-square&logo=kotlin&logoColor=white" alt="Coil" />
+</p>
+
+- **Retrofit:** infraestructura preparada para consumir servicios HTTP.
+- **OkHttp:** transporte HTTP e interceptores.
+- **Moshi:** serialización y deserialización JSON.
+- **Coil:** carga y presentación de portadas e imágenes remotas en Compose.
+
+### 🧪 Pruebas y calidad
+
+<p>
+  <img src="https://skillicons.dev/icons?i=gradle" alt="Gradle" />
+  <img src="https://img.shields.io/badge/JUnit-Unit%20Testing-25A162?style=flat-square&logo=junit5&logoColor=white" alt="JUnit" />
+  <img src="https://img.shields.io/badge/Robolectric-Android%20JVM%20Tests-3DDC84?style=flat-square&logo=android&logoColor=white" alt="Robolectric" />
+  <img src="https://img.shields.io/badge/Compose%20UI%20Test-UI%20Testing-4285F4?style=flat-square&logo=jetpackcompose&logoColor=white" alt="Compose UI Test" />
+  <img src="https://img.shields.io/badge/Roborazzi-Visual%20Regression-8E75B2?style=flat-square" alt="Roborazzi" />
+</p>
+
+- **Gradle:** compilación, gestión de dependencias y automatización del proyecto.
+- **JUnit:** pruebas unitarias.
+- **Robolectric:** pruebas Android sobre JVM.
+- **Compose UI Test:** validación de componentes e interacción de interfaz.
+- **Roborazzi:** capturas y pruebas de regresión visual.
+
+### 🧰 DevOps y control de versiones
+
+<p>
+  <img src="https://skillicons.dev/icons?i=git,github,githubactions" alt="Git, GitHub y GitHub Actions" />
+</p>
+
+- **Git:** control de versiones distribuido.
+- **GitHub:** alojamiento y colaboración sobre el repositorio.
+- **GitHub Actions:** integración continua para ejecutar pruebas y validar el build Android.
+
+### Resumen tecnológico
+
+<p align="center">
+  <img src="https://skillicons.dev/icons?i=kotlin,androidstudio,sqlite,gradle,git,github,githubactions" alt="Kotlin, Android Studio, SQLite, Gradle, Git, GitHub y GitHub Actions" />
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Google%20AI%20Studio-4285F4?style=for-the-badge&logo=google&logoColor=white" alt="Google AI Studio" />
+  <img src="https://img.shields.io/badge/Jetpack%20Compose-4285F4?style=for-the-badge&logo=jetpackcompose&logoColor=white" alt="Jetpack Compose" />
+  <img src="https://img.shields.io/badge/Room-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Room" />
+  <img src="https://img.shields.io/badge/Material%203-6750A4?style=for-the-badge&logo=materialdesign&logoColor=white" alt="Material 3" />
+</p>
 
 > **Prototipado y generación inicial con Google AI Studio + desarrollo Android nativo con Kotlin y Jetpack Compose.**
-
-La capacidad de IA contextual mediante Gemini se considera una fase posterior. No se presenta como una funcionalidad productiva mientras su integración no esté implementada y validada.
 
 ---
 
