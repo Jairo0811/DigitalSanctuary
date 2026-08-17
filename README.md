@@ -1,5 +1,9 @@
 <p align="center">
-  <img src="branding/cover.png" alt="Digital Sanctuary — Read, Think, Preserve" width="100%" />
+  <img src="branding/cover.png" alt="Digital Sanctuary — Read, Think, Preserve" width="720" />
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/UNAPEC-ISO--710-003B70?style=for-the-badge" alt="UNAPEC ISO-710">
 </p>
 
 
@@ -8,7 +12,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/UNAPEC-ISO--710-003B70?style=for-the-badge" alt="UNAPEC ISO-710">
+
   <img src="https://img.shields.io/badge/Estado-En%20desarrollo-F5A623?style=for-the-badge" alt="Estado en desarrollo">
   <img src="https://img.shields.io/badge/Plataforma-Android-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Android">
   <img src="https://img.shields.io/badge/Origen-Google%20AI%20Studio-4285F4?style=for-the-badge&logo=google&logoColor=white" alt="Google AI Studio">
