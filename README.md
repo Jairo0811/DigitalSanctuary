@@ -38,7 +38,22 @@
 
 ### 🧭 Continuidad académica
 
-Digital Sanctuary continúa una trayectoria académica previa con el profesor **Ing. Pedro José Ramirez Rodriguez**. En **Mayo - Agosto 2024**, la asignatura **Bases de Datos 1 (INF-164)** produjo el trabajo que posteriormente evolucionó hacia [NutriFlow](https://github.com/Jairo0811/NutriFlow). En **Mayo - Agosto 2026**, **ISO-710** dio origen al prototipo de Digital Sanctuary.
+**Digital Sanctuary** documenta su continuidad académica mediante relaciones verificables entre estudiantes y profesores. En la colección actual no se ha identificado un compañero recurrente, pero sí existe una **continuidad docente** con [**NutriFlow**](https://github.com/Jairo0811/NutriFlow).
+
+#### 👥 Continuidad por estudiante
+
+Digital Sanctuary fue desarrollado como proyecto académico individual por **Francis Jairo Matías Rosario (A00115261)**. Por esa razón, no existe un equipo de compañeros dentro de este proyecto que pueda utilizarse para establecer una continuidad estudiantil con otro repositorio.
+
+#### 👨‍🏫 Continuidad por profesor
+
+El profesor **Ing. Pedro José Ramirez Rodriguez** aparece en dos momentos distintos de la trayectoria académica documentada en UNAPEC: primero en **Bases de Datos 1 (INF-164)**, donde surgió el prototipo que posteriormente evolucionó hacia NutriFlow, y dos años después en **Desarrollo de Software con Tecnología Propietaria 2 (ISO-710)** con Digital Sanctuary.
+
+| Orden | Asignatura | Proyecto | Período | Profesor recurrente |
+|---:|---|---|---|---|
+| 1 | Bases de Datos 1 (INF-164) | [**NutriFlow**](https://github.com/Jairo0811/NutriFlow) | Mayo - Agosto 2024 | **Ing. Pedro José Ramirez Rodriguez** |
+| 2 | Desarrollo de Software con Tecnología Propietaria 2 (ISO-710) | **Digital Sanctuary** | Mayo - Agosto 2026 | **Ing. Pedro José Ramirez Rodriguez** |
+
+La relación es **formativa y cronológica**: los proyectos son independientes y la continuidad se fundamenta en el mismo profesor en dos etapas diferentes de la carrera.
 
 ---
 
