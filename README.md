@@ -64,18 +64,18 @@ La implementación actual utiliza Android nativo con Kotlin y Jetpack Compose. L
 
 > La entrega universitaria original corresponde al **prototipo académico**. La implementación Android funcional y su evolución técnica forman parte del trabajo posterior sobre esa base conceptual.
 
-## 🔗 Continuidad académica
+## 🧭 Continuidad académica
 
-Digital Sanctuary continúa una relación académica previa con el mismo docente dentro de la formación en UNAPEC.
+**Digital Sanctuary** continúa una trayectoria académica previa con el profesor **Ing. Pedro José Ramirez Rodriguez** en la Universidad APEC (UNAPEC). La relación con [**NutriFlow**](https://github.com/Jairo0811/NutriFlow) es **formativa y cronológica**: los proyectos pertenecen a asignaturas distintas y no comparten dependencia técnica, pero documentan la presencia del mismo docente en dos momentos diferentes de la carrera.
 
-| Tipo de continuidad | Coincidencia | Proyecto relacionado |
-|---|---|---|
-| 👨‍🏫 Profesor recurrente | **Ing. Pedro José Ramirez Rodriguez** | [NutriFlow](https://github.com/Jairo0811/NutriFlow) — Bases de Datos 1 (INF-164) |
-| 🕰️ Continuidad temporal | **2024 → 2026** | El mismo profesor aparece en dos etapas diferentes del plan de estudios |
+La secuencia comenzó en **Mayo - Agosto de 2024** con **Bases de Datos 1 (INF-164)** y el prototipo académico que posteriormente evolucionó hacia NutriFlow. Dos años después, en **Mayo - Agosto de 2026**, continuó con **Desarrollo de Software con Tecnología Propietaria 2 (ISO-710)** y Digital Sanctuary.
 
-La relación conecta **Bases de Datos 1 (INF-164)**, cursada en **Mayo - Agosto de 2024**, con **Desarrollo de Software con Tecnología Propietaria 2 (ISO-710)**, cursada en **Mayo - Agosto de 2026**. La continuidad muestra una evolución desde fundamentos de datos hacia construcción y prototipado de soluciones de software.
+| Orden | Código | Asignatura | Proyecto | Período | Enfoque académico |
+|---:|---|---|---|---|---|
+| 1 | INF-164 | Bases de Datos 1 | [**NutriFlow**](https://github.com/Jairo0811/NutriFlow) | Mayo - Agosto 2024 | Fundamentos de datos, modelado y prototipado de una solución nutricional |
+| 2 | ISO-710 | Desarrollo de Software con Tecnología Propietaria 2 | **Digital Sanctuary** | Mayo - Agosto 2026 | Prototipado con Google AI Studio y evolución hacia una aplicación Android funcional |
 
-> Entre los proyectos comparados no se ha identificado un compañero recurrente que pueda verificarse de forma inequívoca mediante **nombre y matrícula**.
+Vistos en conjunto, ambos proyectos muestran una progresión desde fundamentos de datos y prototipado hasta construcción de software móvil moderno. Cada repositorio conserva su identidad académica original; la continuidad se fundamenta en el **mismo profesor**.
 
 ---
 
