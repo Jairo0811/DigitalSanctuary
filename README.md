@@ -3,10 +3,14 @@
 </p>
 
 <p align="center">
+  <img src="https://img.shields.io/badge/UNAPEC-ISO--710-003B70?style=for-the-badge" alt="UNAPEC ISO-710">
+</p>
+
+<p align="center">
   <img src="https://img.shields.io/badge/Version-1.0.0-111827?style=for-the-badge" alt="Version 1.0.0">
   <img src="https://img.shields.io/badge/Estado-Roadmap%20completado-16A34A?style=for-the-badge" alt="Roadmap completado">
   <img src="https://img.shields.io/badge/Plataforma-Android-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Android">
-  <img src="https://img.shields.io/badge/UNAPEC-ISO--710-003B70?style=for-the-badge" alt="UNAPEC ISO-710">
+
 </p>
 
 <p align="center">
