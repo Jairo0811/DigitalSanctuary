@@ -1,0 +1,6 @@
+{
+  "name": "Digital Sanctuary",
+  "description": "An immersive e-ink optimized reading sanctuary and personal knowledge management hub.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
