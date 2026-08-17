@@ -8,14 +8,22 @@
   <img src="https://img.shields.io/badge/UNAPEC-ISO--710-003B70?style=for-the-badge" alt="UNAPEC ISO-710">
   <img src="https://img.shields.io/badge/Estado-En%20desarrollo-F5A623?style=for-the-badge" alt="Estado en desarrollo">
   <img src="https://img.shields.io/badge/Plataforma-Android-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Android">
-  <img src="https://img.shields.io/badge/Prototipado-Google%20AI%20Studio-4285F4?style=for-the-badge&logo=google&logoColor=white" alt="Google AI Studio">
+  <img src="https://img.shields.io/badge/Origen-Google%20AI%20Studio-4285F4?style=for-the-badge&logo=google&logoColor=white" alt="Google AI Studio">
 </p>
 
 <p align="center">
-  <strong>Google AI Studio · Kotlin · Jetpack Compose · Room · Material 3 · Coroutines</strong>
+  <a href="https://github.com/Jairo0811/DigitalSanctuary/actions/workflows/android-ci.yml">
+    <img src="https://github.com/Jairo0811/DigitalSanctuary/actions/workflows/android-ci.yml/badge.svg" alt="Android CI">
+  </a>
+  <img src="https://img.shields.io/badge/Fase-Stabilization-111827" alt="Fase Stabilization">
+  <img src="https://img.shields.io/badge/Persistencia-Room%20%2B%20SQLite-3DDC84?logo=sqlite&logoColor=white" alt="Room y SQLite">
 </p>
 
-> 🎓 **Origen académico:** Digital Sanctuary nace como un **prototipo académico creado con Google AI Studio** durante la asignatura **Desarrollo de Software con Tecnología Propietaria 2 (ISO-710)** de la **Universidad APEC (UNAPEC)**, en el período **Mayo - Agosto 2026**. Google AI Studio fue utilizado como herramienta de generación y prototipado asistido por inteligencia artificial para materializar la propuesta inicial. La etapa actual toma esa base y la evoluciona hacia una aplicación Android funcional, mantenible y verificable.
+<p align="center">
+  <strong>Google AI Studio · Kotlin · Jetpack Compose · Room · SQLite · Material 3 · Coroutines</strong>
+</p>
+
+> 🎓 **Origen académico:** Digital Sanctuary nace como un **prototipo académico creado con Google AI Studio** durante la asignatura **Desarrollo de Software con Tecnología Propietaria 2 (ISO-710)** de la **Universidad APEC (UNAPEC)**, en el período **Mayo - Agosto 2026**. La etapa actual conserva ese origen y transforma el prototipo en una aplicación Android funcional, mantenible y verificable.
 
 ---
 
@@ -23,11 +31,35 @@
 
 **Digital Sanctuary** es una aplicación móvil Android enfocada en lectura digital y gestión personal del conocimiento. Su objetivo es ofrecer un espacio tranquilo y minimalista donde el usuario pueda organizar sus libros, seguir su progreso de lectura, registrar anotaciones e ideas y convertir lo leído en conocimiento reutilizable.
 
-El concepto combina elementos de un lector digital, un gestor de biblioteca y un sistema de Personal Knowledge Management (PKM).
+El concepto combina elementos de un lector digital, un gestor de biblioteca y un sistema de **Personal Knowledge Management (PKM)**.
 
-La primera materialización técnica del concepto fue generada y prototipada mediante **Google AI Studio**. El repositorio conserva esa procedencia tecnológica: la base Android inicial y su estructura fueron posteriormente trasladadas a GitHub para continuar el desarrollo como un proyecto de software convencional, aplicando control de versiones, CI, pruebas, persistencia y evolución incremental.
+La primera materialización técnica del concepto fue generada y prototipada mediante **Google AI Studio**. Posteriormente, el código Android fue trasladado a GitHub para continuar su evolución mediante prácticas convencionales de ingeniería de software: control de versiones, persistencia local, pruebas automatizadas, integración continua y desarrollo incremental.
 
-La implementación actual utiliza Android nativo con Kotlin y Jetpack Compose. El objetivo ya no es únicamente demostrar visualmente el concepto, sino convertir el prototipo generado con asistencia de IA en software real y mantenible.
+La implementación actual utiliza Android nativo con Kotlin y Jetpack Compose. La meta ya no es únicamente representar la propuesta visual, sino convertir el prototipo académico en un producto funcional y mantenible.
+
+---
+
+## 🎓 Información académica
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Universidad-UNAPEC-003B70?style=flat-square" alt="UNAPEC">
+  <img src="https://img.shields.io/badge/Asignatura-ISO--710-1D4ED8?style=flat-square" alt="ISO-710">
+  <img src="https://img.shields.io/badge/Período-Mayo%20--%20Agosto%202026-0F766E?style=flat-square" alt="Mayo - Agosto 2026">
+</p>
+
+| Información | Detalle |
+|---|---|
+| 👨‍🎓 Estudiante | **Francis Jairo Matías Rosario** |
+| 🆔 Matrícula | **A00115261** |
+| 📖 Asignatura | **Desarrollo de Software con Tecnología Propietaria 2 (ISO-710)** |
+| 👨‍🏫 Profesor | **Ing. Pedro José Ramirez Rodriguez** |
+| 🏫 Institución | **Universidad APEC (UNAPEC)** |
+| 📅 Período académico | **Mayo - Agosto 2026** |
+| 🤖 Herramienta de prototipado | **Google AI Studio** |
+| 📁 Entrega original | **Prototipo académico** |
+| 📱 Evolución actual | **Aplicación Android funcional en desarrollo** |
+
+> La entrega universitaria original corresponde al **prototipo académico**. La implementación Android funcional y su evolución técnica forman parte del trabajo posterior sobre esa base conceptual.
 
 ---
 
@@ -39,15 +71,14 @@ La implementación actual utiliza Android nativo con Kotlin y Jetpack Compose. E
         ├── Concepto de producto
         ├── Diseño de experiencia
         ├── Google AI Studio
-        └── Prototipo generado con asistencia de IA
+        └── Prototipo académico
                 │
                 ▼
 2026 — Digital Sanctuary · Evolución
         │
-        ├── Código fuente versionado en GitHub
-        ├── Kotlin
-        ├── Jetpack Compose
-        ├── Room / SQLite
+        ├── Código Android versionado en GitHub
+        ├── Kotlin + Jetpack Compose
+        ├── Room + SQLite
         ├── Material 3
         ├── Pruebas automatizadas
         └── GitHub Actions
@@ -56,23 +87,7 @@ La implementación actual utiliza Android nativo con Kotlin y Jetpack Compose. E
         Aplicación Android funcional
 ```
 
-Esta separación conserva la procedencia del prototipo y permite distinguir entre la generación inicial realizada mediante Google AI Studio y el trabajo de ingeniería aplicado posteriormente para convertirlo en una aplicación funcional.
-
----
-
-## 🎓 Información académica
-
-| Información | Detalle |
-|---|---|
-| 👨‍🎓 Estudiante | Francis Jairo Matías Rosario |
-| 🆔 Matrícula | A00115261 |
-| 📖 Asignatura | Desarrollo de Software con Tecnología Propietaria 2 (ISO-710) |
-| 👨‍🏫 Profesor | Ing. Pedro José Ramirez Rodriguez |
-| 🏫 Institución | Universidad APEC (UNAPEC) |
-| 📅 Período académico | Mayo - Agosto 2026 |
-| 🤖 Herramienta de prototipado | Google AI Studio |
-| 📁 Entrega original | Prototipo académico generado con asistencia de IA |
-| 📱 Implementación actual | Aplicación Android funcional en desarrollo |
+Esta separación mantiene la trazabilidad entre el trabajo académico original y la etapa posterior de ingeniería del producto.
 
 ---
 
@@ -130,19 +145,22 @@ Libro → Lectura → Anotación → Insight → Nota → Conocimiento
 
 ### 🤖 IA generativa y prototipado
 
-<p>
+<p align="center">
   <img src="https://img.shields.io/badge/Google%20AI%20Studio-Prototipado%20con%20IA-4285F4?style=for-the-badge&logo=google&logoColor=white" alt="Google AI Studio" />
   <img src="https://img.shields.io/badge/Google%20Gemini-IA%20Generativa-8E75B2?style=for-the-badge&logo=googlegemini&logoColor=white" alt="Google Gemini" />
 </p>
 
 - **Google AI Studio:** entorno utilizado para crear y materializar el prototipo académico inicial.
-- **Google Gemini:** tecnología de IA asociada al entorno de prototipado; su integración funcional se contempla para una fase posterior.
-- **Gemini API:** prevista para resúmenes, explicación contextual y generación asistida de insights, una vez implementada de forma segura.
+- **Google Gemini:** tecnología asociada al ecosistema de AI Studio; su integración funcional se contempla para una fase posterior.
+- **Gemini API:** prevista para resúmenes, explicación contextual y generación asistida de insights cuando se implemente de forma segura.
 
-### 📱 Aplicación Android y experiencia de usuario
+### 📱 Aplicación Android y UI
 
-<p>
+<p align="center">
   <img src="https://skillicons.dev/icons?i=kotlin,androidstudio" alt="Kotlin y Android Studio" />
+</p>
+
+<p align="center">
   <img src="https://img.shields.io/badge/Jetpack%20Compose-UI%20Declarativa-4285F4?style=flat-square&logo=jetpackcompose&logoColor=white" alt="Jetpack Compose" />
   <img src="https://img.shields.io/badge/Material%203-Design%20System-6750A4?style=flat-square&logo=materialdesign&logoColor=white" alt="Material 3" />
 </p>
@@ -155,7 +173,7 @@ Libro → Lectura → Anotación → Insight → Nota → Conocimiento
 
 ### 🧠 Estado, arquitectura y asincronía
 
-<p>
+<p align="center">
   <img src="https://img.shields.io/badge/ViewModel-Arquitectura-3F51B5?style=flat-square&logo=android&logoColor=white" alt="Android ViewModel" />
   <img src="https://img.shields.io/badge/StateFlow-Estado%20reactivo-7F52FF?style=flat-square&logo=kotlin&logoColor=white" alt="StateFlow" />
   <img src="https://img.shields.io/badge/Coroutines-Asincronía-7F52FF?style=flat-square&logo=kotlin&logoColor=white" alt="Kotlin Coroutines" />
@@ -168,8 +186,11 @@ Libro → Lectura → Anotación → Insight → Nota → Conocimiento
 
 ### 🗄️ Persistencia local
 
-<p>
+<p align="center">
   <img src="https://skillicons.dev/icons?i=sqlite" alt="SQLite" />
+</p>
+
+<p align="center">
   <img src="https://img.shields.io/badge/Room-Persistence%20Library-3DDC84?style=flat-square&logo=android&logoColor=white" alt="Room" />
   <img src="https://img.shields.io/badge/KSP-Code%20Generation-7F52FF?style=flat-square&logo=kotlin&logoColor=white" alt="KSP" />
 </p>
@@ -180,7 +201,7 @@ Libro → Lectura → Anotación → Insight → Nota → Conocimiento
 
 ### 🌐 Networking, imágenes y serialización
 
-<p>
+<p align="center">
   <img src="https://img.shields.io/badge/Retrofit-HTTP%20Client-48B983?style=flat-square" alt="Retrofit" />
   <img src="https://img.shields.io/badge/OkHttp-Networking-3E4348?style=flat-square" alt="OkHttp" />
   <img src="https://img.shields.io/badge/Moshi-JSON-EF6C00?style=flat-square" alt="Moshi" />
@@ -194,8 +215,11 @@ Libro → Lectura → Anotación → Insight → Nota → Conocimiento
 
 ### 🧪 Pruebas y calidad
 
-<p>
+<p align="center">
   <img src="https://skillicons.dev/icons?i=gradle" alt="Gradle" />
+</p>
+
+<p align="center">
   <img src="https://img.shields.io/badge/JUnit-Unit%20Testing-25A162?style=flat-square&logo=junit5&logoColor=white" alt="JUnit" />
   <img src="https://img.shields.io/badge/Robolectric-Android%20JVM%20Tests-3DDC84?style=flat-square&logo=android&logoColor=white" alt="Robolectric" />
   <img src="https://img.shields.io/badge/Compose%20UI%20Test-UI%20Testing-4285F4?style=flat-square&logo=jetpackcompose&logoColor=white" alt="Compose UI Test" />
@@ -210,15 +234,15 @@ Libro → Lectura → Anotación → Insight → Nota → Conocimiento
 
 ### 🧰 DevOps y control de versiones
 
-<p>
+<p align="center">
   <img src="https://skillicons.dev/icons?i=git,github,githubactions" alt="Git, GitHub y GitHub Actions" />
 </p>
 
 - **Git:** control de versiones distribuido.
-- **GitHub:** alojamiento y colaboración sobre el repositorio.
+- **GitHub:** alojamiento y administración del repositorio.
 - **GitHub Actions:** integración continua para ejecutar pruebas y validar el build Android.
 
-### Resumen tecnológico
+### 🔎 Resumen tecnológico
 
 <p align="center">
   <img src="https://skillicons.dev/icons?i=kotlin,androidstudio,sqlite,gradle,git,github,githubactions" alt="Kotlin, Android Studio, SQLite, Gradle, Git, GitHub y GitHub Actions" />
@@ -286,7 +310,7 @@ app/src/main/java/com/example/
 └── MainActivity.kt
 ```
 
-> El paquete `com.example` pertenece todavía a la base inicial del prototipo y será sustituido por el namespace definitivo del proyecto en una fase de estabilización.
+> El paquete `com.example` pertenece todavía a la base inicial del prototipo y será sustituido por el namespace definitivo del proyecto durante la estabilización.
 
 ---
 
@@ -297,7 +321,7 @@ Digital Sanctuary se encuentra en **Fase 1 — Stabilization**.
 | Componente | Estado |
 |---|:---:|
 | Prototipo académico en Google AI Studio | ✅ |
-| Código Android trasladado/versionado en GitHub | ✅ |
+| Código Android versionado en GitHub | ✅ |
 | Proyecto Android nativo | ✅ |
 | Kotlin + Jetpack Compose | ✅ |
 | Biblioteca local | ✅ |
@@ -368,16 +392,24 @@ Digital Sanctuary se encuentra en **Fase 1 — Stabilization**.
 
 ---
 
-## 📌 Nota sobre el alcance académico
+## 📌 Alcance académico y evolución posterior
 
-Digital Sanctuary **no se presenta como una aplicación completamente funcional desarrollada durante la asignatura ISO-710**. La entrega universitaria fue un prototipo creado con asistencia de **Google AI Studio**. La implementación Android funcional corresponde a la evolución posterior del concepto.
+Digital Sanctuary **no se presenta como una aplicación completamente funcional desarrollada durante la asignatura ISO-710**. La entrega universitaria original fue un prototipo creado con asistencia de **Google AI Studio**.
 
-Esta distinción mantiene explícita tanto la trazabilidad académica como la procedencia de las herramientas de IA utilizadas en la creación del prototipo.
+La implementación Android funcional corresponde a la evolución posterior del concepto. Esta distinción mantiene clara tanto la trazabilidad académica como la procedencia tecnológica del proyecto.
 
 ---
 
-## 👨‍💻 Autor
+## 👨‍💻 Autor y mantenimiento
 
 **Francis Jairo Matías Rosario**  
-Matrícula: **A00115261**  
-Universidad APEC (UNAPEC)
+🆔 Matrícula: **A00115261**  
+🎓 Universidad APEC (UNAPEC)  
+📚 Ingeniería de Software  
+💼 Evolución y mantenimiento de **Digital Sanctuary** como proyecto académico y de portafolio.
+
+---
+
+<p align="center">
+  Desarrollado y evolucionado con 📚 por <strong>Francis Jairo Matías Rosario</strong>
+</p>
