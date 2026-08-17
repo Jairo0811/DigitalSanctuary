@@ -61,6 +61,19 @@ La implementación actual utiliza Android nativo con Kotlin y Jetpack Compose. L
 
 > La entrega universitaria original corresponde al **prototipo académico**. La implementación Android funcional y su evolución técnica forman parte del trabajo posterior sobre esa base conceptual.
 
+## 🔗 Continuidad académica
+
+Digital Sanctuary continúa una relación académica previa con el mismo docente dentro de la formación en UNAPEC.
+
+| Tipo de continuidad | Coincidencia | Proyecto relacionado |
+|---|---|---|
+| 👨‍🏫 Profesor recurrente | **Ing. Pedro José Ramirez Rodriguez** | [NutriFlow](https://github.com/Jairo0811/NutriFlow) — Bases de Datos 1 (INF-164) |
+| 🕰️ Continuidad temporal | **2024 → 2026** | El mismo profesor aparece en dos etapas diferentes del plan de estudios |
+
+La relación conecta **Bases de Datos 1 (INF-164)**, cursada en **Mayo - Agosto de 2024**, con **Desarrollo de Software con Tecnología Propietaria 2 (ISO-710)**, cursada en **Mayo - Agosto de 2026**. La continuidad muestra una evolución desde fundamentos de datos hacia construcción y prototipado de soluciones de software.
+
+> Entre los proyectos comparados no se ha identificado un compañero recurrente que pueda verificarse de forma inequívoca mediante **nombre y matrícula**.
+
 ---
 
 ## 🕰️ Evolución del proyecto
