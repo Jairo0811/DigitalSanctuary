@@ -2,7 +2,6 @@
   <img src="branding/cover.png" alt="Digital Sanctuary — Read, Think, Preserve" width="100%" />
 </p>
 
-<h1 align="center">Digital Sanctuary</h1>
 
 <p align="center">
   <strong>Un santuario digital para leer, pensar y preservar conocimiento.</strong>
