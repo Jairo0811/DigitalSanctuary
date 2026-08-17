@@ -3,56 +3,25 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/UNAPEC-ISO--710-003B70?style=for-the-badge" alt="UNAPEC ISO-710">
-</p>
-
-
-<p align="center">
-  <strong>Un santuario digital para leer, pensar y preservar conocimiento.</strong>
-</p>
-
-<p align="center">
-
-  <img src="https://img.shields.io/badge/Estado-En%20desarrollo-F5A623?style=for-the-badge" alt="Estado en desarrollo">
+  <img src="https://img.shields.io/badge/Version-1.0.0-111827?style=for-the-badge" alt="Version 1.0.0">
+  <img src="https://img.shields.io/badge/Estado-Roadmap%20completado-16A34A?style=for-the-badge" alt="Roadmap completado">
   <img src="https://img.shields.io/badge/Plataforma-Android-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Android">
-  <img src="https://img.shields.io/badge/Origen-Google%20AI%20Studio-4285F4?style=for-the-badge&logo=google&logoColor=white" alt="Google AI Studio">
+  <img src="https://img.shields.io/badge/UNAPEC-ISO--710-003B70?style=for-the-badge" alt="UNAPEC ISO-710">
 </p>
 
 <p align="center">
   <a href="https://github.com/Jairo0811/DigitalSanctuary/actions/workflows/android-ci.yml">
     <img src="https://github.com/Jairo0811/DigitalSanctuary/actions/workflows/android-ci.yml/badge.svg" alt="Android CI">
   </a>
-  <img src="https://img.shields.io/badge/Fase-Stabilization-111827" alt="Fase Stabilization">
-  <img src="https://img.shields.io/badge/Persistencia-Room%20%2B%20SQLite-3DDC84?logo=sqlite&logoColor=white" alt="Room y SQLite">
 </p>
 
-<p align="center">
-  <strong>Google AI Studio · Kotlin · Jetpack Compose · Room · SQLite · Material 3 · Coroutines</strong>
-</p>
+<p align="center"><strong>Un santuario digital para leer, pensar y preservar conocimiento.</strong></p>
 
-> 🎓 **Origen académico:** Digital Sanctuary nace como un **prototipo académico creado con Google AI Studio** durante la asignatura **Desarrollo de Software con Tecnología Propietaria 2 (ISO-710)** de la **Universidad APEC (UNAPEC)**, en el período **Mayo - Agosto 2026**. La etapa actual conserva ese origen y transforma el prototipo en una aplicación Android funcional, mantenible y verificable.
-
----
-
-## 📖 Descripción
-
-**Digital Sanctuary** es una aplicación móvil Android enfocada en lectura digital y gestión personal del conocimiento. Su objetivo es ofrecer un espacio tranquilo y minimalista donde el usuario pueda organizar sus libros, seguir su progreso de lectura, registrar anotaciones e ideas y convertir lo leído en conocimiento reutilizable.
-
-El concepto combina elementos de un lector digital, un gestor de biblioteca y un sistema de **Personal Knowledge Management (PKM)**.
-
-La primera materialización técnica del concepto fue generada y prototipada mediante **Google AI Studio**. Posteriormente, el código Android fue trasladado a GitHub para continuar su evolución mediante prácticas convencionales de ingeniería de software: control de versiones, persistencia local, pruebas automatizadas, integración continua y desarrollo incremental.
-
-La implementación actual utiliza Android nativo con Kotlin y Jetpack Compose. La meta ya no es únicamente representar la propuesta visual, sino convertir el prototipo académico en un producto funcional y mantenible.
+**Digital Sanctuary** es una aplicación Android nativa que combina biblioteca personal, lector EPUB/PDF, gestión de conocimiento y asistencia opcional con Google Gemini. El producto evolucionó desde un prototipo académico creado con Google AI Studio hasta una aplicación Android estructurada con Kotlin, Jetpack Compose, Room y prácticas de ingeniería de software.
 
 ---
 
 ## 🎓 Información académica
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Universidad-UNAPEC-003B70?style=flat-square" alt="UNAPEC">
-  <img src="https://img.shields.io/badge/Asignatura-ISO--710-1D4ED8?style=flat-square" alt="ISO-710">
-  <img src="https://img.shields.io/badge/Período-Mayo%20--%20Agosto%202026-0F766E?style=flat-square" alt="Mayo - Agosto 2026">
-</p>
 
 | Información | Detalle |
 |---|---|
@@ -62,374 +31,252 @@ La implementación actual utiliza Android nativo con Kotlin y Jetpack Compose. L
 | 👨‍🏫 Profesor | **Ing. Pedro José Ramirez Rodriguez** |
 | 🏫 Institución | **Universidad APEC (UNAPEC)** |
 | 📅 Período académico | **Mayo - Agosto 2026** |
-| 🤖 Herramienta de prototipado | **Google AI Studio** |
-| 📁 Entrega original | **Prototipo académico** |
-| 📱 Evolución actual | **Aplicación Android funcional en desarrollo** |
+| 🤖 Prototipado original | **Google AI Studio** |
+| 📱 Evolución posterior | **Aplicación Android nativa** |
 
-> La entrega universitaria original corresponde al **prototipo académico**. La implementación Android funcional y su evolución técnica forman parte del trabajo posterior sobre esa base conceptual.
+> La entrega universitaria original fue un prototipo académico. La implementación Android funcional, el lector real, el Knowledge Hub, las pruebas, CI y la integración de IA corresponden a la evolución posterior del concepto.
 
-## 🧭 Continuidad académica
+### 🧭 Continuidad académica
 
-**Digital Sanctuary** continúa una trayectoria académica previa con el profesor **Ing. Pedro José Ramirez Rodriguez** en la Universidad APEC (UNAPEC). La relación con [**NutriFlow**](https://github.com/Jairo0811/NutriFlow) es **formativa y cronológica**: los proyectos pertenecen a asignaturas distintas y no comparten dependencia técnica, pero documentan la presencia del mismo docente en dos momentos diferentes de la carrera.
-
-La secuencia comenzó en **Mayo - Agosto de 2024** con **Bases de Datos 1 (INF-164)** y el prototipo académico que posteriormente evolucionó hacia NutriFlow. Dos años después, en **Mayo - Agosto de 2026**, continuó con **Desarrollo de Software con Tecnología Propietaria 2 (ISO-710)** y Digital Sanctuary.
-
-| Orden | Código | Asignatura | Proyecto | Período | Enfoque académico |
-|---:|---|---|---|---|---|
-| 1 | INF-164 | Bases de Datos 1 | [**NutriFlow**](https://github.com/Jairo0811/NutriFlow) | Mayo - Agosto 2024 | Fundamentos de datos, modelado y prototipado de una solución nutricional |
-| 2 | ISO-710 | Desarrollo de Software con Tecnología Propietaria 2 | **Digital Sanctuary** | Mayo - Agosto 2026 | Prototipado con Google AI Studio y evolución hacia una aplicación Android funcional |
-
-Vistos en conjunto, ambos proyectos muestran una progresión desde fundamentos de datos y prototipado hasta construcción de software móvil moderno. Cada repositorio conserva su identidad académica original; la continuidad se fundamenta en el **mismo profesor**.
+Digital Sanctuary continúa una trayectoria académica previa con el profesor **Ing. Pedro José Ramirez Rodriguez**. En **Mayo - Agosto 2024**, la asignatura **Bases de Datos 1 (INF-164)** produjo el trabajo que posteriormente evolucionó hacia [NutriFlow](https://github.com/Jairo0811/NutriFlow). En **Mayo - Agosto 2026**, **ISO-710** dio origen al prototipo de Digital Sanctuary.
 
 ---
 
-## 🕰️ Evolución del proyecto
+## ✨ Capacidades de v1.0.0
 
-```text
-2026 — UNAPEC · ISO-710
-        │
-        ├── Concepto de producto
-        ├── Diseño de experiencia
-        ├── Google AI Studio
-        └── Prototipo académico
-                │
-                ▼
-2026 — Digital Sanctuary · Evolución
-        │
-        ├── Código Android versionado en GitHub
-        ├── Kotlin + Jetpack Compose
-        ├── Room + SQLite
-        ├── Material 3
-        ├── Pruebas automatizadas
-        └── GitHub Actions
-                │
-                ▼
-        Aplicación Android funcional
+### 📚 Library Management
+
+- CRUD completo de libros.
+- ISBN, editorial, número de páginas, descripción y portada.
+- Estados `TO_READ`, `READING`, `COMPLETED`, `PAUSED` y `ABANDONED`.
+- Favoritos y valoración.
+- Búsqueda por título, autor, categoría, ISBN y editorial.
+- Filtros por estado, categoría y favoritos.
+- Orden por reciente, título, autor y progreso.
+- Persistencia local con Room/SQLite.
+
+### 📖 Reader
+
+- Importación mediante Android Storage Access Framework.
+- Soporte para **EPUB** y **PDF**.
+- EPUB procesado localmente desde XHTML/HTML contenido en el archivo.
+- PDF renderizado con `PdfRenderer` nativo de Android.
+- Navegación por capítulos o páginas.
+- Posición y progreso persistentes.
+- Marcadores por ubicación.
+- Notas vinculadas a la ubicación de lectura.
+- Ajustes de tamaño de texto y experiencia visual orientada a lectura tranquila/e-ink.
+
+### 🧠 Knowledge Hub
+
+- Notas, highlights e insights asociados a libros.
+- Tags normalizados.
+- Búsqueda global sobre biblioteca y conocimiento.
+- Relaciones entre notas mediante enlaces persistentes.
+- Conteo de conexiones.
+- Exportación de la base de conocimiento a Markdown mediante Android Share Sheet.
+- Creación de conocimiento directamente desde el Reader.
+
+### ✨ Gemini AI Assistance
+
+- Arquitectura desacoplada mediante `AiAssistant`.
+- Resumen de fragmentos.
+- Explicación de conceptos.
+- Extracción de insights.
+- Síntesis contextual de notas guardadas.
+- Guardado de respuestas útiles como `AI Insight` dentro del Knowledge Hub.
+- Límite de contexto para evitar solicitudes excesivas.
+
+> Los PDF se renderizan localmente. La versión actual **no extrae ni envía automáticamente el contenido visual de páginas PDF a Gemini**.
+
+---
+
+## 🔐 Seguridad de IA
+
+Digital Sanctuary no requiere una credencial Gemini dentro del repositorio.
+
+La configuración recomendada para producción es:
+
+```env
+AI_PROXY_URL=https://tu-backend.example.com/ai
 ```
 
-Esta separación mantiene la trazabilidad entre el trabajo académico original y la etapa posterior de ingeniería del producto.
+El backend/proxy conserva la credencial real y el APK únicamente conoce el endpoint.
 
----
+Para desarrollo local existe un fallback opcional:
 
-## 🎯 Visión del producto
-
-Digital Sanctuary busca cubrir cuatro necesidades principales:
-
-| Necesidad | Respuesta de Digital Sanctuary |
-|---|---|
-| Organizar una biblioteca personal | Catálogo de libros y seguimiento de progreso |
-| Leer con menos distracciones | Interfaz minimalista inspirada en e-ink |
-| Capturar ideas importantes | Notas y anotaciones estructuradas |
-| Convertir lectura en conocimiento | Clasificación de ideas como Thesis, Insight y Source |
-
-El flujo conceptual del producto es:
-
-```text
-Libro → Lectura → Anotación → Insight → Nota → Conocimiento
+```env
+GEMINI_API_KEY=tu_clave_local
 ```
 
+Ese fallback se compila **solo en builds `debug`**. Los builds `release` mantienen `GEMINI_API_KEY` vacío y deben utilizar `AI_PROXY_URL`.
+
+Nunca se deben versionar `.env`, keystores ni credenciales reales.
+
 ---
 
-## ✨ Funcionalidades
+## 🏗️ Arquitectura
 
-### Actualmente implementadas
+```text
+Jetpack Compose UI
+        │
+        ▼
+MainViewModel / StateFlow
+        │
+        ├──────────────► ReaderEngine
+        │                 ├── EPUB (ZIP + HTML)
+        │                 └── PDF (PdfRenderer)
+        │
+        ├──────────────► AiAssistant
+        │                 ├── AI Proxy (producción)
+        │                 └── Gemini API (debug local)
+        │
+        ▼
+Repository
+        │
+        ▼
+AppDao / Room
+        │
+        ▼
+SQLite
+```
 
-- biblioteca local de libros;
-- seguimiento de progreso de lectura;
-- selección de libro activo;
-- persistencia local con Room;
-- anotaciones clasificadas como Thesis, Insight y Source;
-- notas asociadas a libros;
-- configuración persistente;
-- navegación entre Library, Reading, Notes y Settings;
-- personalización inicial de lectura;
-- interfaz construida con Jetpack Compose y Material 3.
+Principios aplicados:
 
-### Próximas fases
+- separación UI / aplicación / datos;
+- Repository Pattern;
+- estado reactivo con StateFlow;
+- operaciones de I/O con Coroutines;
+- persistencia mediante migraciones explícitas;
+- integración de IA detrás de una abstracción intercambiable;
+- credenciales fuera del control de versiones.
 
-- edición y eliminación completa de libros;
-- importación de EPUB/PDF;
-- marcadores y posición real de lectura;
-- búsqueda y filtros;
-- biblioteca por categorías;
-- relaciones entre notas;
-- búsqueda global de conocimiento;
-- exportación de notas;
-- mejoras de accesibilidad;
-- modo e-ink avanzado;
-- integración opcional de Gemini para resúmenes, explicación de fragmentos y generación de insights.
+---
+
+## 🗄️ Modelo persistente
+
+Room se encuentra en **schema version 3** y conserva migraciones explícitas:
+
+```text
+v1 → v2
+Biblioteca avanzada, estados y metadatos
+
+v2 → v3
+Documentos reales, posición de lectura,
+tags, bookmarks y knowledge links
+```
+
+Entidades principales:
+
+- `Book`
+- `Annotation`
+- `Bookmark`
+- `KnowledgeLink`
+- `AppSetting`
+
+No se utiliza migración destructiva como estrategia de actualización.
 
 ---
 
 ## 🧱 Stack tecnológico
-
-### 🤖 IA generativa y prototipado
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Google%20AI%20Studio-Prototipado%20con%20IA-4285F4?style=for-the-badge&logo=google&logoColor=white" alt="Google AI Studio" />
-  <img src="https://img.shields.io/badge/Google%20Gemini-IA%20Generativa-8E75B2?style=for-the-badge&logo=googlegemini&logoColor=white" alt="Google Gemini" />
-</p>
-
-- **Google AI Studio:** entorno utilizado para crear y materializar el prototipo académico inicial.
-- **Google Gemini:** tecnología asociada al ecosistema de AI Studio; su integración funcional se contempla para una fase posterior.
-- **Gemini API:** prevista para resúmenes, explicación contextual y generación asistida de insights cuando se implemente de forma segura.
-
-### 📱 Aplicación Android y UI
-
-<p align="center">
-  <img src="https://skillicons.dev/icons?i=kotlin,androidstudio" alt="Kotlin y Android Studio" />
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Jetpack%20Compose-UI%20Declarativa-4285F4?style=flat-square&logo=jetpackcompose&logoColor=white" alt="Jetpack Compose" />
-  <img src="https://img.shields.io/badge/Material%203-Design%20System-6750A4?style=flat-square&logo=materialdesign&logoColor=white" alt="Material 3" />
-</p>
-
-- **Android:** plataforma móvil objetivo.
-- **Kotlin:** lenguaje principal de la aplicación.
-- **Jetpack Compose:** construcción declarativa de pantallas y componentes.
-- **Material 3:** sistema de diseño y componentes visuales.
-- **Android Studio:** entorno principal para desarrollo, ejecución y depuración.
-
-### 🧠 Estado, arquitectura y asincronía
-
-<p align="center">
-  <img src="https://img.shields.io/badge/ViewModel-Arquitectura-3F51B5?style=flat-square&logo=android&logoColor=white" alt="Android ViewModel" />
-  <img src="https://img.shields.io/badge/StateFlow-Estado%20reactivo-7F52FF?style=flat-square&logo=kotlin&logoColor=white" alt="StateFlow" />
-  <img src="https://img.shields.io/badge/Coroutines-Asincronía-7F52FF?style=flat-square&logo=kotlin&logoColor=white" alt="Kotlin Coroutines" />
-</p>
-
-- **ViewModel:** separación de estado y lógica respecto de la interfaz.
-- **StateFlow:** exposición reactiva del estado hacia Compose.
-- **Kotlin Coroutines:** ejecución de operaciones asíncronas y acceso a datos fuera del hilo principal.
-- **Repository Pattern:** capa intermedia entre la UI/ViewModel y la persistencia local.
-
-### 🗄️ Persistencia local
-
-<p align="center">
-  <img src="https://skillicons.dev/icons?i=sqlite" alt="SQLite" />
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Room-Persistence%20Library-3DDC84?style=flat-square&logo=android&logoColor=white" alt="Room" />
-  <img src="https://img.shields.io/badge/KSP-Code%20Generation-7F52FF?style=flat-square&logo=kotlin&logoColor=white" alt="KSP" />
-</p>
-
-- **Room:** capa de persistencia local y acceso tipado a datos.
-- **SQLite:** motor de base de datos embebido utilizado por Room.
-- **KSP:** procesamiento y generación de código para anotaciones de Room y otras dependencias compatibles.
-
-### 🌐 Networking, imágenes y serialización
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Retrofit-HTTP%20Client-48B983?style=flat-square" alt="Retrofit" />
-  <img src="https://img.shields.io/badge/OkHttp-Networking-3E4348?style=flat-square" alt="OkHttp" />
-  <img src="https://img.shields.io/badge/Moshi-JSON-EF6C00?style=flat-square" alt="Moshi" />
-  <img src="https://img.shields.io/badge/Coil-Image%20Loading-00A8E8?style=flat-square&logo=kotlin&logoColor=white" alt="Coil" />
-</p>
-
-- **Retrofit:** infraestructura preparada para consumir servicios HTTP.
-- **OkHttp:** transporte HTTP e interceptores.
-- **Moshi:** serialización y deserialización JSON.
-- **Coil:** carga y presentación de portadas e imágenes remotas en Compose.
-
-### 🧪 Pruebas y calidad
-
-<p align="center">
-  <img src="https://skillicons.dev/icons?i=gradle" alt="Gradle" />
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/JUnit-Unit%20Testing-25A162?style=flat-square&logo=junit5&logoColor=white" alt="JUnit" />
-  <img src="https://img.shields.io/badge/Robolectric-Android%20JVM%20Tests-3DDC84?style=flat-square&logo=android&logoColor=white" alt="Robolectric" />
-  <img src="https://img.shields.io/badge/Compose%20UI%20Test-UI%20Testing-4285F4?style=flat-square&logo=jetpackcompose&logoColor=white" alt="Compose UI Test" />
-  <img src="https://img.shields.io/badge/Roborazzi-Visual%20Regression-8E75B2?style=flat-square" alt="Roborazzi" />
-</p>
-
-- **Gradle:** compilación, gestión de dependencias y automatización del proyecto.
-- **JUnit:** pruebas unitarias.
-- **Robolectric:** pruebas Android sobre JVM.
-- **Compose UI Test:** validación de componentes e interacción de interfaz.
-- **Roborazzi:** capturas y pruebas de regresión visual.
-
-### 🧰 DevOps y control de versiones
-
-<p align="center">
-  <img src="https://skillicons.dev/icons?i=git,github,githubactions" alt="Git, GitHub y GitHub Actions" />
-</p>
-
-- **Git:** control de versiones distribuido.
-- **GitHub:** alojamiento y administración del repositorio.
-- **GitHub Actions:** integración continua para ejecutar pruebas y validar el build Android.
-
-### 🔎 Resumen tecnológico
 
 <p align="center">
   <img src="https://skillicons.dev/icons?i=kotlin,androidstudio,sqlite,gradle,git,github,githubactions" alt="Kotlin, Android Studio, SQLite, Gradle, Git, GitHub y GitHub Actions" />
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Google%20AI%20Studio-4285F4?style=for-the-badge&logo=google&logoColor=white" alt="Google AI Studio" />
-  <img src="https://img.shields.io/badge/Jetpack%20Compose-4285F4?style=for-the-badge&logo=jetpackcompose&logoColor=white" alt="Jetpack Compose" />
-  <img src="https://img.shields.io/badge/Room-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Room" />
-  <img src="https://img.shields.io/badge/Material%203-6750A4?style=for-the-badge&logo=materialdesign&logoColor=white" alt="Material 3" />
+  <img src="https://img.shields.io/badge/Jetpack%20Compose-4285F4?style=flat-square&logo=jetpackcompose&logoColor=white" alt="Jetpack Compose" />
+  <img src="https://img.shields.io/badge/Room-3DDC84?style=flat-square&logo=android&logoColor=white" alt="Room" />
+  <img src="https://img.shields.io/badge/Material%203-6750A4?style=flat-square&logo=materialdesign&logoColor=white" alt="Material 3" />
+  <img src="https://img.shields.io/badge/Google%20Gemini-8E75B2?style=flat-square&logo=googlegemini&logoColor=white" alt="Google Gemini" />
 </p>
 
-> **Prototipado y generación inicial con Google AI Studio + desarrollo Android nativo con Kotlin y Jetpack Compose.**
+| Área | Tecnologías |
+|---|---|
+| Android | Kotlin, Jetpack Compose, Material 3 |
+| Estado | ViewModel, StateFlow, Coroutines |
+| Datos | Room, SQLite, KSP |
+| Reader | Storage Access Framework, PdfRenderer, ZIP/XHTML |
+| IA | Gemini, OkHttp, AI Proxy opcional |
+| Networking | OkHttp, Retrofit, Moshi |
+| Imágenes | Coil |
+| Testing | JUnit, Robolectric, Compose UI Test, Roborazzi |
+| CI | GitHub Actions, JDK 21, Gradle 9.3.1 |
 
 ---
 
-## 🏗️ Arquitectura actual
+## 🧪 Calidad y CI
 
-```text
-Google AI Studio
-  (prototipo inicial)
-        │
-        ▼
-Código Android versionado
-        │
-        ▼
-Jetpack Compose UI
-        │
-        ▼
-MainViewModel / StateFlow
-        │
-        ▼
-Repository
-        │
-        ▼
-Room / AppDao
-        │
-        ▼
-SQLite
+El workflow `Android CI` valida cada cambio sobre `main` y ramas `agent/**` mediante:
+
+```bash
+gradle testDebugUnitTest --stacktrace
+gradle assembleDebug --stacktrace
 ```
 
-Estructura principal:
+La suite incluye pruebas unitarias, Robolectric y regresión visual con Roborazzi. El objetivo de integración es que ninguna fase se fusione a `main` sin pruebas y APK debug construidos correctamente.
+
+---
+
+## 🗺️ Roadmap
+
+| Fase | Alcance | Estado |
+|---|---|:---:|
+| 1 | Stabilization, Android base, Room, CI | ✅ |
+| 2 | Library Management completo | ✅ |
+| 3 | Reader EPUB/PDF, progreso y bookmarks | ✅ |
+| 4 | Knowledge Hub, tags, enlaces, búsqueda y exportación | ✅ |
+| 5 | Gemini AI Assistance | ✅ |
+
+**Roadmap funcional v1.0.0 completado.**
+
+Las mejoras posteriores se gestionarán como nuevas versiones y no como fases pendientes del roadmap original.
+
+---
+
+## 📦 Identidad de aplicación
 
 ```text
-app/src/main/java/com/example/
-├── data/
-│   ├── Annotation.kt
-│   ├── AppDao.kt
-│   ├── AppDatabase.kt
-│   ├── Book.kt
-│   ├── Repository.kt
-│   └── Setting.kt
-│
-├── ui/
-│   ├── MainViewModel.kt
-│   ├── components/
-│   ├── screens/
-│   │   ├── LibraryScreen.kt
-│   │   ├── MainScreen.kt
-│   │   ├── NotesScreen.kt
-│   │   ├── ReaderScreen.kt
-│   │   └── SettingsScreen.kt
-│   └── theme/
-│
-└── MainActivity.kt
+Application ID: com.jairomatias.digitalsanctuary
+Namespace:      com.jairomatias.digitalsanctuary
+Version:        1.0.0
 ```
 
-> El paquete `com.example` pertenece todavía a la base inicial del prototipo y será sustituido por el namespace definitivo del proyecto durante la estabilización.
+La identidad visual del launcher utiliza una marca propia inspirada en un **libro abierto dentro de un santuario**, reemplazando los recursos genéricos iniciales de Android.
 
 ---
 
-## ✅ Estado actual
+## 🚀 Ejecución
 
-Digital Sanctuary se encuentra en **Fase 1 — Stabilization**.
+Requisitos recomendados:
 
-| Componente | Estado |
-|---|:---:|
-| Prototipo académico en Google AI Studio | ✅ |
-| Código Android versionado en GitHub | ✅ |
-| Proyecto Android nativo | ✅ |
-| Kotlin + Jetpack Compose | ✅ |
-| Biblioteca local | ✅ |
-| Room / SQLite | ✅ |
-| Notas y anotaciones | ✅ |
-| Seguimiento de progreso | ✅ |
-| Configuraciones persistentes | ✅ |
-| GitHub Actions | 🔄 |
-| Namespace definitivo | ⏳ |
-| Gestión completa de libros | ⏳ |
-| Importación EPUB/PDF | ⏳ |
-| Reader de contenido real | ⏳ |
-| Knowledge Graph / relaciones | ⏳ |
-| Integración funcional con Gemini | ⏳ |
+- Android Studio compatible con el stack actual;
+- JDK 21 para reproducir el entorno de CI y los tests Robolectric SDK 36;
+- dispositivo/emulador Android con API mínima 24.
 
-> **Leyenda:** ✅ disponible · 🔄 en progreso · ⏳ planificado
+Para compilar:
 
----
+```bash
+gradle assembleDebug
+```
 
-## 🗺️ Hoja de ruta
+Para pruebas:
 
-### Fase 1 — Stabilization
+```bash
+gradle testDebugUnitTest
+```
 
-- [x] Prototipo inicial mediante Google AI Studio.
-- [x] Estructura Android base.
-- [x] Persistencia local con Room.
-- [x] Navegación principal.
-- [x] Gestión inicial de biblioteca y notas.
-- [x] Documentar origen académico y tecnológico.
-- [ ] Validar build limpio en CI.
-- [ ] Sustituir namespace de plantilla.
-- [ ] Integrar identidad visual definitiva.
-
-### Fase 2 — Library Management
-
-- [ ] Crear libros.
-- [ ] Editar libros.
-- [ ] Eliminar libros.
-- [ ] Buscar y filtrar.
-- [ ] Categorías y estados de lectura.
-- [ ] Mejorar portadas y metadatos.
-
-### Fase 3 — Reader
-
-- [ ] Importar EPUB/PDF.
-- [ ] Renderizar contenido real.
-- [ ] Guardar posición de lectura.
-- [ ] Marcadores.
-- [ ] Ajustes de tipografía y contraste.
-- [ ] Modo e-ink avanzado.
-
-### Fase 4 — Knowledge Hub
-
-- [ ] Highlights y notas vinculadas.
-- [ ] Relaciones entre conceptos.
-- [ ] Etiquetas.
-- [ ] Búsqueda global.
-- [ ] Exportación de conocimiento.
-
-### Fase 5 — Gemini AI Assistance
-
-- [ ] Definir integración segura con Gemini API.
-- [ ] Resumir fragmentos.
-- [ ] Explicar conceptos.
-- [ ] Generar insights sugeridos.
-- [ ] Consultar notas y biblioteca de forma contextual.
-- [ ] Mantener claves y credenciales fuera del cliente cuando corresponda.
-
----
-
-## 📌 Alcance académico y evolución posterior
-
-Digital Sanctuary **no se presenta como una aplicación completamente funcional desarrollada durante la asignatura ISO-710**. La entrega universitaria original fue un prototipo creado con asistencia de **Google AI Studio**.
-
-La implementación Android funcional corresponde a la evolución posterior del concepto. Esta distinción mantiene clara tanto la trazabilidad académica como la procedencia tecnológica del proyecto.
+La IA es opcional: sin `AI_PROXY_URL` o clave de desarrollo, el resto de Digital Sanctuary continúa funcionando y la interfaz informa que AI Assistance no está configurada.
 
 ---
 
 ## 👨‍💻 Autor y mantenimiento
 
 **Francis Jairo Matías Rosario**  
-🆔 Matrícula: **A00115261**  
-🎓 Universidad APEC (UNAPEC)  
-📚 Ingeniería de Software  
-💼 Evolución y mantenimiento de **Digital Sanctuary** como proyecto académico y de portafolio.
+Matrícula: **A00115261**  
+Universidad APEC (UNAPEC)  
+Ingeniería de Software
 
----
+Digital Sanctuary forma parte de una colección de proyectos académicos evolucionados posteriormente con estándares de desarrollo profesional.
 
-<p align="center">
-  Desarrollado y evolucionado con 📚 por <strong>Francis Jairo Matías Rosario</strong>
-</p>
+<p align="center"><strong>Read · Think · Preserve</strong></p>

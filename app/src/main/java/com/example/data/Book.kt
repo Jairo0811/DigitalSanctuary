@@ -14,6 +14,12 @@ object ReadingStatus {
     val values = listOf(TO_READ, READING, COMPLETED, PAUSED, ABANDONED)
 }
 
+object DocumentFormat {
+    const val NONE = "NONE"
+    const val EPUB = "EPUB"
+    const val PDF = "PDF"
+}
+
 @Entity(tableName = "books")
 data class Book(
     @PrimaryKey val id: String,
@@ -34,5 +40,9 @@ data class Book(
     @ColumnInfo(defaultValue = "0") val isFavorite: Boolean = false,
     @ColumnInfo(defaultValue = "0") val dateAdded: Long = 0L,
     @ColumnInfo(defaultValue = "0") val startedAt: Long = 0L,
-    @ColumnInfo(defaultValue = "0") val finishedAt: Long = 0L
+    @ColumnInfo(defaultValue = "0") val finishedAt: Long = 0L,
+    @ColumnInfo(defaultValue = "''") val localUri: String = "",
+    @ColumnInfo(defaultValue = "'NONE'") val documentFormat: String = DocumentFormat.NONE,
+    @ColumnInfo(defaultValue = "0") val currentLocation: Int = 0,
+    @ColumnInfo(defaultValue = "0") val totalLocations: Int = 0
 )

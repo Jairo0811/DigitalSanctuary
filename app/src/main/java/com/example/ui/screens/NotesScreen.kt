@@ -1,631 +1,324 @@
 package com.example.ui.screens
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
+import android.content.Intent
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
-import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
-import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridItemSpan
-import androidx.compose.foundation.lazy.staggeredgrid.items
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material.icons.filled.AddLink
+import androidx.compose.material.icons.filled.AutoAwesome
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.IosShare
+import androidx.compose.material.icons.filled.Link
+import androidx.compose.material.icons.filled.NoteAdd
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.AssistChip
+import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.data.Annotation
+import com.example.data.Book
+import com.example.ui.AiUiState
 import com.example.ui.MainViewModel
-import com.example.ui.components.BookCover
-import com.example.ui.theme.AnnotationBlue
-import com.example.ui.theme.AnnotationYellow
-import com.example.ui.theme.SepiaPaper
 
 @Composable
-fun NotesScreen(
-    viewModel: MainViewModel,
-    modifier: Modifier = Modifier
-) {
-    val annotations by viewModel.allAnnotations.collectAsState()
-    val books by viewModel.allBooks.collectAsState()
+fun NotesScreen(viewModel: MainViewModel, modifier: Modifier = Modifier) {
+    val context = LocalContext.current
+    val results by viewModel.knowledgeSearchResults.collectAsState()
+    val query by viewModel.knowledgeQuery.collectAsState()
+    val selectedBookId by viewModel.selectedBookId.collectAsState()
+    val links by viewModel.knowledgeLinks.collectAsState()
+    val allNotes by viewModel.allAnnotations.collectAsState()
+    val aiState by viewModel.aiState.collectAsState()
 
-    var searchQuery by remember { mutableStateOf("") }
-    var showAddNoteDialog by remember { mutableStateOf(false) }
-    var selectedCategoryFilter by remember { mutableStateOf<String?>(null) }
+    var showAddDialog by remember { mutableStateOf(false) }
+    var showAiDialog by remember { mutableStateOf(false) }
+    var linkSourceId by remember { mutableIntStateOf(0) }
 
-    // Filter annotations based on search queries and category buttons
-    val filteredAnnotations = annotations.filter { ann ->
-        val matchesSearch = searchQuery.isBlank() ||
-                ann.content.contains(searchQuery, ignoreCase = true) ||
-                ann.note.contains(searchQuery, ignoreCase = true) ||
-                ann.bookTitle.contains(searchQuery, ignoreCase = true)
-        val matchesCategory = selectedCategoryFilter == null || ann.type.equals(selectedCategoryFilter, ignoreCase = true)
-        matchesSearch && matchesCategory
-    }
+    Column(modifier = modifier.fillMaxSize().padding(horizontal = 16.dp)) {
+        Spacer(Modifier.height(12.dp))
+        Text("Knowledge Hub", style = MaterialTheme.typography.headlineMedium, fontFamily = FontFamily.Serif, fontWeight = FontWeight.Bold)
+        Text(
+            "Search books and notes, connect ideas, preserve highlights and export your knowledge.",
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+        Spacer(Modifier.height(12.dp))
 
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-    ) {
-        // Search & New Note Action Section
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 12.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+        OutlinedTextField(
+            value = query,
+            onValueChange = viewModel::updateKnowledgeQuery,
+            modifier = Modifier.fillMaxWidth(),
+            singleLine = true,
+            leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
+            label = { Text("Search knowledge") }
+        )
+
+        Row(
+            modifier = Modifier.fillMaxWidth().padding(vertical = 10.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            // High-fidelity search bar matching HTML
-            OutlinedTextField(
-                value = searchQuery,
-                onValueChange = { searchQuery = it },
-                placeholder = {
-                    Text(
-                        text = "Search annotations, tags, or books...",
-                        style = MaterialTheme.typography.labelLarge,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
-                    )
-                },
-                leadingIcon = {
-                    Icon(
-                        imageVector = Icons.Default.Search,
-                        contentDescription = "Search Icon",
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                },
-                trailingIcon = if (searchQuery.isNotEmpty()) {
-                    {
-                        IconButton(onClick = { searchQuery = "" }) {
-                            Icon(
-                                imageVector = Icons.Default.Clear,
-                                contentDescription = "Clear search",
-                                tint = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                        }
-                    }
-                } else null,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .testTag("notes_search_input"),
-                colors = TextFieldDefaults.colors(
-                    focusedContainerColor = SepiaPaper.copy(alpha = 0.3f),
-                    unfocusedContainerColor = SepiaPaper.copy(alpha = 0.3f),
-                    disabledContainerColor = Color.Transparent,
-                    focusedIndicatorColor = Color(0xFF0F0F0F),
-                    unfocusedIndicatorColor = MaterialTheme.colorScheme.outlineVariant
-                ),
-                shape = RoundedCornerShape(8.dp)
-            )
-
-            // Category Chips Row
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                // Add Note Action Button
-                Button(
-                    onClick = { showAddNoteDialog = true },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF0F0F0F),
-                        contentColor = Color.White
-                    ),
-                    shape = RoundedCornerShape(8.dp),
-                    contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp),
-                    modifier = Modifier
-                        .height(36.dp)
-                        .testTag("add_new_note_button")
-                ) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(4.dp)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Add,
-                            contentDescription = "Add Icon",
-                            modifier = Modifier.size(16.dp)
-                        )
-                        Text(
-                            text = "New Note",
-                            style = MaterialTheme.typography.labelMedium,
-                            fontSize = 12.sp
-                        )
-                    }
+            Button(onClick = { showAddDialog = true }) {
+                Icon(Icons.Default.NoteAdd, contentDescription = null)
+                Text(" Note")
+            }
+            OutlinedButton(onClick = {
+                val share = Intent(Intent.ACTION_SEND).apply {
+                    type = "text/markdown"
+                    putExtra(Intent.EXTRA_SUBJECT, "Digital Sanctuary Knowledge Export")
+                    putExtra(Intent.EXTRA_TEXT, viewModel.exportKnowledgeAsMarkdown())
                 }
+                context.startActivity(Intent.createChooser(share, "Export knowledge"))
+            }) {
+                Icon(Icons.Default.IosShare, contentDescription = null)
+                Text(" Export")
+            }
+            OutlinedButton(onClick = { showAiDialog = true }) {
+                Icon(Icons.Default.AutoAwesome, contentDescription = null)
+                Text(" Ask AI")
+            }
+        }
 
-                // Clean Filter badges
-                listOf("Thesis", "Insight", "Source").forEach { cat ->
-                    val isSelected = selectedCategoryFilter == cat
-                    val badgeColor = when (cat) {
-                        "Thesis" -> AnnotationBlue
-                        "Insight" -> AnnotationYellow
-                        else -> SepiaPaper
-                    }
+        Text(
+            "${results.books.size} books · ${results.annotations.size} notes · ${links.size} links",
+            style = MaterialTheme.typography.labelMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+        HorizontalDivider(Modifier.padding(vertical = 8.dp))
 
-                    Surface(
-                        onClick = {
-                            selectedCategoryFilter = if (isSelected) null else cat
-                        },
-                        color = if (isSelected) Color(0xFF0F0F0F) else badgeColor.copy(alpha = 0.4f),
-                        shape = RoundedCornerShape(6.dp),
-                        border = BorderStroke(1.dp, if (isSelected) Color.Black else Color.Transparent),
-                        modifier = Modifier
-                            .height(36.dp)
-                            .testTag("filter_chip_$cat")
-                    ) {
-                        Box(
-                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Row(
-                                horizontalArrangement = Arrangement.spacedBy(6.dp),
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Box(
-                                    modifier = Modifier
-                                        .size(8.dp)
-                                        .background(badgeColor, CircleShape)
-                                        .border(0.5.dp, Color.Gray, CircleShape)
-                                )
-                                Text(
-                                    text = cat,
-                                    fontSize = 12.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    color = if (isSelected) Color.White else Color(0xFF0F0F0F)
-                                )
+        LazyColumn(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            if (results.books.isNotEmpty()) {
+                item { SectionTitle("Books") }
+                items(results.books, key = { "book-${it.id}" }) { book -> BookKnowledgeCard(book, viewModel) }
+            }
+            if (results.annotations.isNotEmpty()) {
+                item { SectionTitle("Notes & Highlights") }
+                items(results.annotations, key = { "note-${it.id}" }) { annotation ->
+                    KnowledgeNoteCard(
+                        annotation = annotation,
+                        isLinkSource = linkSourceId == annotation.id,
+                        linkedCount = links.count { it.fromAnnotationId == annotation.id || it.toAnnotationId == annotation.id },
+                        onDelete = { viewModel.deleteAnnotation(annotation.id) },
+                        onLink = {
+                            if (linkSourceId == 0) {
+                                linkSourceId = annotation.id
+                            } else {
+                                viewModel.linkAnnotations(linkSourceId, annotation.id)
+                                linkSourceId = 0
                             }
                         }
-                    }
-                }
-            }
-        }
-
-        Divider(color = MaterialTheme.colorScheme.outlineVariant)
-
-        // Empty Search state
-        if (filteredAnnotations.isEmpty()) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f),
-                contentAlignment = Alignment.Center
-            ) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center,
-                    modifier = Modifier.padding(32.dp)
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.AutoStories,
-                        contentDescription = "No Notes",
-                        tint = MaterialTheme.colorScheme.outlineVariant,
-                        modifier = Modifier.size(48.dp)
-                    )
-                    Spacer(modifier = Modifier.height(12.dp))
-                    Text(
-                        text = "No annotations found",
-                        fontFamily = FontFamily.Serif,
-                        fontWeight = FontWeight.SemiBold,
-                        color = MaterialTheme.colorScheme.outline
-                    )
-                    Text(
-                        text = "Try searching for a different term or write a new note above.",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.8f),
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.padding(top = 4.dp)
                     )
                 }
             }
-        } else {
-            // PKM Bento Staggered Grid (supports responsive column wrapping beautifully)
-            LazyVerticalStaggeredGrid(
-                columns = StaggeredGridCells.Fixed(2),
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(horizontal = 8.dp),
-                contentPadding = PaddingValues(top = 12.dp, bottom = 80.dp),
-                horizontalArrangement = Arrangement.spacedBy(10.dp),
-                verticalItemSpacing = 10.dp
-            ) {
-                items(filteredAnnotations) { ann ->
-                    BentoNoteCard(
-                        annotation = ann,
-                        onDeleteClick = { viewModel.deleteAnnotation(ann.id) }
+            if (results.books.isEmpty() && results.annotations.isEmpty()) {
+                item {
+                    Text(
+                        "No knowledge matches this search.",
+                        modifier = Modifier.padding(vertical = 36.dp),
+                        style = MaterialTheme.typography.bodyLarge
                     )
                 }
             }
         }
     }
 
-    // Dynamic dialogue overlay to construct new Annotations
-    if (showAddNoteDialog) {
-        var noteType by remember { mutableStateOf("Thesis") }
-        var noteContent by remember { mutableStateOf("") }
-        var userNoteText by remember { mutableStateOf("") }
-        var selectedBook by remember { mutableStateOf(books.firstOrNull() ?: books[0]) }
-        var locationInfo by remember { mutableStateOf("") }
+    if (showAddDialog) {
+        AddKnowledgeDialog(
+            books = results.books,
+            initialBookId = selectedBookId ?: results.books.firstOrNull()?.id.orEmpty(),
+            onDismiss = { showAddDialog = false },
+            onSave = { bookId, type, content, note, tags ->
+                viewModel.addKnowledgeNote(bookId, type, content, note, tags)
+                showAddDialog = false
+            }
+        )
+    }
 
-        AlertDialog(
-            onDismissRequest = { showAddNoteDialog = false },
-            title = {
-                Text(
-                    text = "Create annotation",
-                    style = MaterialTheme.typography.titleLarge,
-                    fontFamily = FontFamily.Serif
+    if (showAiDialog) {
+        KnowledgeAiDialog(
+            state = aiState,
+            onRun = {
+                val knowledgeContext = allNotes.joinToString("\n\n") { note ->
+                    "${note.bookTitle} | ${note.type} | ${note.tags}\n${note.content}\n${note.note}"
+                }
+                viewModel.runAi(
+                    "Synthesize this personal knowledge base. Identify recurring themes, contradictions, and useful connections.",
+                    knowledgeContext
                 )
             },
-            text = {
-                Column(
-                    verticalArrangement = Arrangement.spacedBy(10.dp),
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    // Category filter Row
-                    Column {
-                        Text(
-                            text = "CATEGORY TYPE",
-                            style = MaterialTheme.typography.labelLarge,
-                            fontSize = 11.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = Color(0xFF76777B),
-                            modifier = Modifier.padding(bottom = 6.dp)
-                        )
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(6.dp),
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            listOf("Thesis", "Insight", "Source").forEach { level ->
-                                val isSelected = noteType == level
-                                Button(
-                                    onClick = { noteType = level },
-                                    modifier = Modifier.weight(1f),
-                                    colors = ButtonDefaults.buttonColors(
-                                        containerColor = if (isSelected) Color(0xFF0F0F0F) else MaterialTheme.colorScheme.surfaceVariant,
-                                        contentColor = if (isSelected) Color.White else MaterialTheme.colorScheme.onSurface
-                                    ),
-                                    shape = RoundedCornerShape(6.dp),
-                                    contentPadding = PaddingValues(vertical = 4.dp)
-                                ) {
-                                    Text(text = level, fontSize = 11.sp)
-                                }
-                            }
-                        }
-                    }
-
-                    // Book list dropdown placeholder/simplistic selection
-                    Column {
-                        Text(
-                            text = "ASSIGN TO BOOK",
-                            style = MaterialTheme.typography.labelLarge,
-                            fontSize = 11.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = Color(0xFF76777B),
-                            modifier = Modifier.padding(bottom = 6.dp)
-                        )
-                        Surface(
-                            shape = RoundedCornerShape(8.dp),
-                            color = MaterialTheme.colorScheme.surfaceVariant,
-                            modifier = Modifier.fillMaxWidth().clickable {
-                                // Rotate chosen book
-                                val idx = books.indexOf(selectedBook)
-                                val nextIdx = (idx + 1) % books.size
-                                selectedBook = books[nextIdx]
-                            }
-                        ) {
-                            Row(
-                                modifier = Modifier.padding(12.dp),
-                                horizontalArrangement = Arrangement.SpaceBetween,
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Text(
-                                    text = selectedBook.title,
-                                    fontSize = 13.sp,
-                                    fontWeight = FontWeight.Bold
-                                )
-                                Icon(
-                                    imageVector = Icons.Default.SwapHoriz,
-                                    contentDescription = "Rotate Book choice",
-                                    modifier = Modifier.size(16.dp)
-                                )
-                            }
-                        }
-                    }
-
-                    // Location Info
-                    OutlinedTextField(
-                        value = locationInfo,
-                        onValueChange = { locationInfo = it },
-                        label = { Text("Location (e.g. p. 48 or Chap 2)") },
-                        modifier = Modifier.fillMaxWidth()
-                    )
-
-                    // Citation Content
-                    OutlinedTextField(
-                        value = noteContent,
-                        onValueChange = { noteContent = it },
-                        label = { Text("Quoted reference text") },
-                        modifier = Modifier.fillMaxWidth(),
-                        maxLines = 3
-                    )
-
-                    // Personal Thought notes
-                    OutlinedTextField(
-                        value = userNoteText,
-                        onValueChange = { userNoteText = it },
-                        label = { Text("Personal interpretation note (Optional)") },
-                        modifier = Modifier.fillMaxWidth(),
-                        maxLines = 3
-                    )
-                }
-            },
-            confirmButton = {
-                Button(
-                    onClick = {
-                        if (noteContent.isNotBlank() || userNoteText.isNotBlank()) {
-                            viewModel.addAnnotation(
-                                Annotation(
-                                    bookId = selectedBook.id,
-                                    type = noteType,
-                                    content = noteContent.ifBlank { "Personal note" },
-                                    note = userNoteText,
-                                    bookTitle = selectedBook.title,
-                                    bookAuthor = selectedBook.author,
-                                    locationInfo = locationInfo.ifBlank { "Unplaced" }
-                                )
-                            )
-                            showAddNoteDialog = false
-                        }
-                    },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF0F0F0F),
-                        contentColor = Color.White
-                    )
-                ) {
-                    Text("Add")
-                }
-            },
-            dismissButton = {
-                TextButton(
-                    onClick = { showAddNoteDialog = false }
-                ) {
-                    Text("Cancel", color = Color(0xFF5F5E59))
-                }
+            onDismiss = {
+                viewModel.clearAiState()
+                showAiDialog = false
             }
         )
     }
 }
 
-// Bento card item representation mapping the unique styling categories of the original layout
 @Composable
-fun BentoNoteCard(
-    annotation: Annotation,
-    onDeleteClick: () -> Unit
-) {
-    val levelColor = when (annotation.type) {
-        "Thesis" -> AnnotationBlue
-        "Insight" -> AnnotationYellow
-        else -> SepiaPaper
-    }
+private fun SectionTitle(text: String) {
+    Text(text, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold, modifier = Modifier.padding(top = 8.dp))
+}
 
+@Composable
+private fun BookKnowledgeCard(book: Book, viewModel: MainViewModel) {
     Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .testTag("bento_card_${annotation.id}"),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceContainerLowest
-        ),
+        modifier = Modifier.fillMaxWidth().clickable { viewModel.selectBook(book.id) },
         shape = RoundedCornerShape(12.dp),
-        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant)
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f))
     ) {
-        Column(modifier = Modifier.fillMaxWidth()) {
-            // Category color strip matching original HTML Bento grid
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(6.dp)
-                    .background(levelColor)
-                    .border(width = 0.5.dp, color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.3f))
-            )
+        Column(Modifier.padding(14.dp)) {
+            Text(book.title, style = MaterialTheme.typography.titleMedium, fontFamily = FontFamily.Serif, fontWeight = FontWeight.Bold)
+            Text(book.author, style = MaterialTheme.typography.bodySmall)
+            if (book.category.isNotBlank()) Text(book.category, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
+        }
+    }
+}
 
-            Column(
-                modifier = Modifier.padding(12.dp),
-                verticalArrangement = Arrangement.spacedBy(10.dp)
-            ) {
-                // Headline Tag + Delete Icon row
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Surface(
-                        color = MaterialTheme.colorScheme.surfaceVariant,
-                        shape = RoundedCornerShape(4.dp)
-                    ) {
-                        Text(
-                            text = annotation.type.uppercase(),
-                            fontSize = 10.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
-                        )
-                    }
-
-                    IconButton(
-                        onClick = onDeleteClick,
-                        modifier = Modifier.size(16.dp)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.DeleteOutline,
-                            contentDescription = "Delete citation note",
-                            tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
-                            modifier = Modifier.size(14.dp)
-                        )
-                    }
+@Composable
+private fun KnowledgeNoteCard(
+    annotation: Annotation,
+    isLinkSource: Boolean,
+    linkedCount: Int,
+    onDelete: () -> Unit,
+    onLink: () -> Unit
+) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(14.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = if (isLinkSource) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surface
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
+    ) {
+        Column(Modifier.padding(16.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Column(Modifier.weight(1f)) {
+                    Text(annotation.type, style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
+                    Text(annotation.bookTitle.ifBlank { "Unassigned" }, style = MaterialTheme.typography.titleSmall, fontFamily = FontFamily.Serif)
                 }
-
-                // If type is Source, let's render a custom styled physical book slot as shown in Card 3 of HTML
-                if (annotation.type.equals("Source", ignoreCase = true)) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        BookCover(
-                            title = annotation.bookTitle,
-                            author = annotation.bookAuthor,
-                            coverUrl = "", // Blank triggers beautiful tactile title canvas fallback
-                            modifier = Modifier
-                                .width(40.dp)
-                                .height(56.dp)
-                        )
-
-                        Column(modifier = Modifier.weight(1f)) {
-                            Text(
-                                text = annotation.bookTitle,
-                                fontSize = 13.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = Color(0xFF0F0F0F),
-                                maxLines = 1,
-                                overflow = TextOverflow.Ellipsis
-                            )
-                            Text(
-                                text = annotation.bookAuthor,
-                                fontSize = 11.sp,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                maxLines = 1,
-                                overflow = TextOverflow.Ellipsis
-                            )
-                            
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.spacedBy(3.dp),
-                                modifier = Modifier.padding(top = 4.dp)
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Default.CheckCircle,
-                                    contentDescription = "Check Icon",
-                                    tint = Color(0xFF5F5E59),
-                                    modifier = Modifier.size(12.dp)
-                                )
-                                Text(
-                                    text = "Imported via Calibre",
-                                    fontSize = 10.sp,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                                )
-                            }
-                        }
-                    }
-                } else {
-                    // Regular quoted citation or study thought
-                    Text(
-                        text = "\"${annotation.content}\"",
-                        fontFamily = FontFamily.Serif,
-                        fontSize = 14.sp,
-                        lineHeight = 20.sp,
-                        color = Color(0xFF0F0F0F),
-                        overflow = TextOverflow.Ellipsis,
-                        maxLines = 5
-                    )
-
-                    // Displays written personal thoughts if any
-                    if (annotation.note.isNotEmpty()) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .background(MaterialTheme.colorScheme.surfaceVariant, RoundedCornerShape(8.dp))
-                                .border(
-                                    width = 1.dp,
-                                    color = MaterialTheme.colorScheme.outlineVariant,
-                                    shape = RoundedCornerShape(8.dp)
-                                )
-                                .padding(8.dp)
-                        ) {
-                            Text(
-                                text = annotation.note,
-                                fontSize = 12.sp,
-                                lineHeight = 16.sp,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                fontFamily = FontFamily.SansSerif,
-                                modifier = Modifier.fillMaxWidth()
-                            )
-                        }
-                    }
+                IconButton(onClick = onLink) {
+                    Icon(if (isLinkSource) Icons.Default.AddLink else Icons.Default.Link, contentDescription = "Link note")
                 }
-
-                // Divider line
-                Divider(color = MaterialTheme.colorScheme.outlineVariant)
-
-                // Meta footer displaying book references
-                Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(4.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Book,
-                            contentDescription = "Reference book",
-                            tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                            modifier = Modifier.size(12.dp)
-                        )
-                        Text(
-                            text = annotation.bookTitle,
-                            fontSize = 11.sp,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis,
-                            fontWeight = FontWeight.Medium
-                        )
-                    }
-
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(6.dp)
-                    ) {
-                        if (annotation.bookAuthor.isNotEmpty()) {
-                            Surface(
-                                shape = CircleShape,
-                                border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
-                                color = Color.Transparent
-                            ) {
-                                Text(
-                                    text = annotation.bookAuthor,
-                                    fontSize = 9.sp,
-                                    maxLines = 1,
-                                    modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
-                                )
-                            }
-                        }
-
-                        if (annotation.locationInfo.isNotEmpty()) {
-                            Surface(
-                                shape = CircleShape,
-                                border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
-                                color = Color.Transparent
-                            ) {
-                                Text(
-                                    text = annotation.locationInfo,
-                                    fontSize = 9.sp,
-                                    modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
-                                )
-                            }
-                        }
-                    }
+                IconButton(onClick = onDelete) {
+                    Icon(Icons.Default.Delete, contentDescription = "Delete note")
                 }
+            }
+            if (annotation.locationInfo.isNotBlank()) {
+                Text(annotation.locationInfo, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
+            Spacer(Modifier.height(8.dp))
+            Text(annotation.content, maxLines = 7, overflow = TextOverflow.Ellipsis)
+            if (annotation.note.isNotBlank()) {
+                Spacer(Modifier.height(8.dp))
+                Text(annotation.note, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
+            Row(horizontalArrangement = Arrangement.spacedBy(6.dp), modifier = Modifier.padding(top = 10.dp)) {
+                annotation.tags.split(',').filter { it.isNotBlank() }.take(4).forEach { tag ->
+                    AssistChip(onClick = {}, label = { Text("#$tag") })
+                }
+                if (linkedCount > 0) AssistChip(onClick = {}, label = { Text("$linkedCount links") })
             }
         }
     }
+}
+
+@Composable
+private fun AddKnowledgeDialog(
+    books: List<Book>,
+    initialBookId: String,
+    onDismiss: () -> Unit,
+    onSave: (String, String, String, String, String) -> Unit
+) {
+    var selectedBookId by remember { mutableStateOf(initialBookId) }
+    var type by remember { mutableStateOf("Insight") }
+    var content by remember { mutableStateOf("") }
+    var note by remember { mutableStateOf("") }
+    var tags by remember { mutableStateOf("") }
+
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("New knowledge note") },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                if (books.isNotEmpty()) {
+                    Text("Book", style = MaterialTheme.typography.labelMedium)
+                    Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                        books.take(3).forEach { book ->
+                            AssistChip(
+                                onClick = { selectedBookId = book.id },
+                                label = { Text(if (selectedBookId == book.id) "✓ ${book.title.take(15)}" else book.title.take(15)) }
+                            )
+                        }
+                    }
+                }
+                OutlinedTextField(type, { type = it }, label = { Text("Type") }, modifier = Modifier.fillMaxWidth())
+                OutlinedTextField(content, { content = it }, label = { Text("Excerpt / idea") }, minLines = 3, modifier = Modifier.fillMaxWidth())
+                OutlinedTextField(note, { note = it }, label = { Text("Reflection") }, minLines = 2, modifier = Modifier.fillMaxWidth())
+                OutlinedTextField(tags, { tags = it }, label = { Text("Tags") }, modifier = Modifier.fillMaxWidth())
+            }
+        },
+        confirmButton = {
+            Button(onClick = { onSave(selectedBookId, type, content, note, tags) }, enabled = selectedBookId.isNotBlank() && (content.isNotBlank() || note.isNotBlank())) {
+                Text("Save")
+            }
+        },
+        dismissButton = { TextButton(onClick = onDismiss) { Text("Cancel") } }
+    )
+}
+
+@Composable
+private fun KnowledgeAiDialog(state: AiUiState, onRun: () -> Unit, onDismiss: () -> Unit) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("Ask Digital Sanctuary") },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                Text("Gemini can synthesize your saved notes and highlights. Your configured AI endpoint receives only the text needed for this request.")
+                Button(onClick = onRun, enabled = state !is AiUiState.Loading) {
+                    Icon(Icons.Default.AutoAwesome, contentDescription = null)
+                    Text(" Analyze knowledge base")
+                }
+                when (state) {
+                    AiUiState.Idle -> Unit
+                    AiUiState.Loading -> CircularProgressIndicator()
+                    is AiUiState.Error -> Text(state.message, color = MaterialTheme.colorScheme.error)
+                    is AiUiState.Success -> Text(state.text)
+                }
+            }
+        },
+        confirmButton = { TextButton(onClick = onDismiss) { Text("Close") } }
+    )
 }
