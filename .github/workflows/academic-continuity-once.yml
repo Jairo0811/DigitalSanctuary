@@ -1,0 +1,64 @@
+name: Academic continuity one-time update
+
+on:
+  push:
+    branches:
+      - agent/academic-continuity
+    paths:
+      - .github/workflows/academic-continuity-once.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/academic-continuity
+
+      - name: Add academic continuity section
+        shell: python
+        run: |
+          from pathlib import Path
+
+          path = Path("README.md")
+          text = path.read_text(encoding="utf-8")
+
+          if "## 🔗 Continuidad académica" in text:
+              raise SystemExit(0)
+
+          anchor = "> La entrega universitaria original corresponde al **prototipo académico**. La implementación Android funcional y su evolución técnica forman parte del trabajo posterior sobre esa base conceptual."
+          section = """
+
+          ## 🔗 Continuidad académica
+
+          Digital Sanctuary continúa una relación académica previa con el mismo docente dentro de la formación en UNAPEC.
+
+          | Tipo de continuidad | Coincidencia | Proyecto relacionado |
+          |---|---|---|
+          | 👨‍🏫 Profesor recurrente | **Ing. Pedro José Ramirez Rodriguez** | [NutriFlow](https://github.com/Jairo0811/NutriFlow) — Bases de Datos 1 (INF-164) |
+          | 🕰️ Continuidad temporal | **2024 → 2026** | El mismo profesor aparece en dos etapas diferentes del plan de estudios |
+
+          La relación conecta **Bases de Datos 1 (INF-164)**, cursada en **Mayo - Agosto de 2024**, con **Desarrollo de Software con Tecnología Propietaria 2 (ISO-710)**, cursada en **Mayo - Agosto de 2026**. La continuidad muestra una evolución desde fundamentos de datos hacia construcción y prototipado de soluciones de software.
+
+          > Entre los proyectos comparados no se ha identificado un compañero recurrente que pueda verificarse de forma inequívoca mediante **nombre y matrícula**.
+          """.rstrip()
+
+          if anchor not in text:
+              raise SystemExit("Academic anchor not found")
+
+          path.write_text(text.replace(anchor, anchor + section, 1), encoding="utf-8")
+
+      - name: Commit README update
+        shell: bash
+        run: |
+          if git diff --quiet -- README.md; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "docs: document academic continuity"
+          git push origin HEAD:agent/academic-continuity
