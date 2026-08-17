@@ -13,7 +13,8 @@ fun projectSecret(name: String): String {
   providers.gradleProperty(name).orNull?.takeIf { it.isNotBlank() }?.let { return it }
   val envFile = rootProject.file(".env")
   if (!envFile.exists()) return ""
-  val properties = Properties().apply { envFile.inputStream().use(::load) }
+  val properties = Properties()
+  envFile.inputStream().use { properties.load(it) }
   return properties.getProperty(name, "")
 }
 
@@ -31,7 +32,7 @@ android {
     versionName = "1.0.0"
 
     buildConfigField("String", "AI_PROXY_URL", quotedBuildConfig(projectSecret("AI_PROXY_URL")))
-    buildConfigField("String", "GEMINI_API_KEY", quotedBuildConfig(projectSecret("GEMINI_API_KEY")))
+    buildConfigField("String", "GEMINI_API_KEY", "\"\"")
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
   }
@@ -54,6 +55,7 @@ android {
       signingConfig = signingConfigs.getByName("release")
     }
     debug {
+      buildConfigField("String", "GEMINI_API_KEY", quotedBuildConfig(projectSecret("GEMINI_API_KEY")))
       // Android Gradle Plugin generates the local debug signing key outside version control.
     }
   }
