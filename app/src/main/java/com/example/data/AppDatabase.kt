@@ -4,18 +4,34 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@Database(entities = [Book::class, Annotation::class, AppSetting::class], version = 1, exportSchema = false)
+@Database(entities = [Book::class, Annotation::class, AppSetting::class], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun appDao(): AppDao
 
     companion object {
         @Volatile
         private var INSTANCE: AppDatabase? = null
+
+        private val MIGRATION_1_2 = object : Migration(1, 2) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE books ADD COLUMN isbn TEXT NOT NULL DEFAULT ''")
+                db.execSQL("ALTER TABLE books ADD COLUMN publisher TEXT NOT NULL DEFAULT ''")
+                db.execSQL("ALTER TABLE books ADD COLUMN pageCount INTEGER NOT NULL DEFAULT 0")
+                db.execSQL("ALTER TABLE books ADD COLUMN readingStatus TEXT NOT NULL DEFAULT 'TO_READ'")
+                db.execSQL("ALTER TABLE books ADD COLUMN rating INTEGER NOT NULL DEFAULT 0")
+                db.execSQL("ALTER TABLE books ADD COLUMN isFavorite INTEGER NOT NULL DEFAULT 0")
+                db.execSQL("ALTER TABLE books ADD COLUMN dateAdded INTEGER NOT NULL DEFAULT 0")
+                db.execSQL("ALTER TABLE books ADD COLUMN startedAt INTEGER NOT NULL DEFAULT 0")
+                db.execSQL("ALTER TABLE books ADD COLUMN finishedAt INTEGER NOT NULL DEFAULT 0")
+                db.execSQL("UPDATE books SET readingStatus = CASE WHEN isFinished = 1 THEN 'COMPLETED' WHEN progress > 0 THEN 'READING' ELSE 'TO_READ' END")
+            }
+        }
 
         fun getDatabase(context: Context, scope: CoroutineScope): AppDatabase {
             return INSTANCE ?: synchronized(this) {
@@ -24,6 +40,7 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "digital_sanctuary_database"
                 )
+                    .addMigrations(MIGRATION_1_2)
                     .addCallback(AppDatabaseCallback(scope))
                     .build()
                 INSTANCE = instance
@@ -46,11 +63,9 @@ abstract class AppDatabase : RoomDatabase() {
         }
 
         suspend fun populateDatabase(dao: AppDao) {
-            // Delete existing (just in case)
-            // Populate settings
             dao.insertSettings(AppSetting())
+            val now = System.currentTimeMillis()
 
-            // Default books
             val meditationsCover = "https://lh3.googleusercontent.com/aida-public/AB6AXuCNoTFq2rPvLbXA6Rw9kifUjRTgK8hkYC1Q5IHKi73cxI_hdPgOPFMxVhVOiHhJTyRydRST9sK5dtzWriXmiMvdW3M-MIhEWQAk725RUEnUWT2LounDQrpw6yYa9zgHNmy23OmmgyydFmQEMfkM4NDzEoX7eXrhQjdCNWuaPhMYwN6SLzLUrbwBMTE4IMU_kyy3GIo0vmcO3myKBQ9hdn9TzWfY9xHh7pjZtsae0giKYgvvoKPVnS92PgvHC2BDfAaX58Pby6XQBoY"
             val targetDesignCover = "https://lh3.googleusercontent.com/aida-public/AB6AXuCHoQQOzwpvZhVHxMR8lCez3a0V_OUPIV5Qa9p4S_uGjNH4SX0__Y8eyOF7aMQFG3-lHtYUfzl_kUCJSJX6-Mbp_xmmrRo0L1eESIvKauZJPu-4Uq5TAQyqV8L7bx4JvWzOFfypP8WCUXZCY8nO8a3Ebu1PyVWD0AEuCtP_PmgFw62FrCWDSHnW2SQropsiVelApQYtVAFjKKOzsbbChAoUIfYfk_eBRT7jbHbc1QhPJRcsZOq5YSRDPCkx1xfTx6s8YovNYqty2Oc"
             val fastSlowCover = "https://lh3.googleusercontent.com/aida-public/AB6AXuAyqsG9U5J1hNJZdGXj8aUVo9C53fYwuFE6O2srzjW9-VvUGlrcWXOq_9DTTUfV3tIjiqKFMQVYBxlH1J6KC7qjf7Sf6zF0kiS9SHHt72TKSe6_wxWHmCCsvJx4Ml3UByDb3Nx56rTff81S3tL2TkZlKV7t5PzmKNRVsWGOVPNXDoPdJ4igrdLnZC4Ac0gX_RAsbZ02hjroc3Vhok78DXa-CgqtKCKESCfODbNHLSGgaN1ZAh72Tt1zr_0JF1U-nBUbG6qqeuVbDxU"
@@ -66,7 +81,10 @@ abstract class AppDatabase : RoomDatabase() {
                     quote = "You have power over your mind - not outside events. Realize this, and you will find strength.",
                     coverUrl = meditationsCover,
                     description = "A series of personal writings by Marcus Aurelius, Roman Emperor, outlining his ideas on Stoic philosophy.",
-                    lastReadTimestamp = System.currentTimeMillis()
+                    readingStatus = ReadingStatus.READING,
+                    dateAdded = now,
+                    startedAt = now,
+                    lastReadTimestamp = now
                 ),
                 Book(
                     id = "design_everyday_things",
@@ -76,7 +94,10 @@ abstract class AppDatabase : RoomDatabase() {
                     progress = 0.12f,
                     coverUrl = targetDesignCover,
                     description = "A best-selling book on cognitive engineering and aesthetic ergonomics by cognitive scientist Don Norman.",
-                    lastReadTimestamp = System.currentTimeMillis() - 5000
+                    readingStatus = ReadingStatus.READING,
+                    dateAdded = now - 5_000,
+                    startedAt = now - 5_000,
+                    lastReadTimestamp = now - 5_000
                 ),
                 Book(
                     id = "thinking_fast_slow",
@@ -87,7 +108,11 @@ abstract class AppDatabase : RoomDatabase() {
                     isFinished = true,
                     coverUrl = fastSlowCover,
                     description = "An exploration of the mind's dual systems of fast, emotional, and intuitive thinking combined with slow, deliberative choices.",
-                    lastReadTimestamp = System.currentTimeMillis() - 10000
+                    readingStatus = ReadingStatus.COMPLETED,
+                    dateAdded = now - 10_000,
+                    startedAt = now - 10_000,
+                    finishedAt = now - 9_000,
+                    lastReadTimestamp = now - 10_000
                 ),
                 Book(
                     id = "sapiens",
@@ -97,7 +122,10 @@ abstract class AppDatabase : RoomDatabase() {
                     progress = 0.45f,
                     coverUrl = sapiensCover,
                     description = "A bold survey of human history detailing the evolution and cultural achievements of Homo sapiens from prehistoric bands to algorithms.",
-                    lastReadTimestamp = System.currentTimeMillis() - 15000
+                    readingStatus = ReadingStatus.READING,
+                    dateAdded = now - 15_000,
+                    startedAt = now - 15_000,
+                    lastReadTimestamp = now - 15_000
                 ),
                 Book(
                     id = "deep_work",
@@ -105,9 +133,11 @@ abstract class AppDatabase : RoomDatabase() {
                     author = "Cal Newport",
                     category = "Productivity",
                     progress = 0.05f,
-                    coverUrl = "", // Explicit empty string for falling back to elegant text canvas placeholder
                     description = "Rules for focused success in a distracted world, advocating for intense intellectual focus as a modern superpower.",
-                    lastReadTimestamp = System.currentTimeMillis() - 20000
+                    readingStatus = ReadingStatus.READING,
+                    dateAdded = now - 20_000,
+                    startedAt = now - 20_000,
+                    lastReadTimestamp = now - 20_000
                 ),
                 Book(
                     id = "architecture_attention",
@@ -115,14 +145,15 @@ abstract class AppDatabase : RoomDatabase() {
                     author = "Dr. Elias Vance",
                     category = "Cognitive Friction",
                     progress = 0.18f,
-                    coverUrl = "",
                     description = "An academic treatise exploring Digital Ergonomics, Visual-Syntactic Text Formatting, and reclaiming focus away from hyper-extraction loops.",
-                    lastReadTimestamp = System.currentTimeMillis() - 25000
+                    readingStatus = ReadingStatus.READING,
+                    dateAdded = now - 25_000,
+                    startedAt = now - 25_000,
+                    lastReadTimestamp = now - 25_000
                 )
             )
             dao.insertBooks(books)
 
-            // Default Annotations
             dao.insertAnnotation(
                 Annotation(
                     bookId = "understanding_media",
