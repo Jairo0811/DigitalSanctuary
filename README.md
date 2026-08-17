@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="branding/cover.webp" alt="Digital Sanctuary — Read, Think, Preserve" width="100%" />
+</p>
+
 <h1 align="center">Digital Sanctuary</h1>
 
 <p align="center">
