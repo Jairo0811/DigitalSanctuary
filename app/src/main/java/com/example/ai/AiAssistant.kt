@@ -1,6 +1,6 @@
 package com.example.ai
 
-import com.example.BuildConfig
+import com.jairomatias.digitalsanctuary.BuildConfig
 import java.io.IOException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
