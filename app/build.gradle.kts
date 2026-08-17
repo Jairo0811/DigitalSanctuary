@@ -20,7 +20,7 @@ fun projectSecret(name: String): String {
 fun quotedBuildConfig(value: String): String = "\"${value.replace("\\", "\\\\").replace("\"", "\\\"")}\""
 
 android {
-  namespace = "com.example"
+  namespace = "com.jairomatias.digitalsanctuary"
   compileSdk { version = release(36) { minorApiLevel = 1 } }
 
   defaultConfig {
