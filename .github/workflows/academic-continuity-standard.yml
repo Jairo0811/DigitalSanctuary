@@ -24,3 +24,5 @@ jobs:
           git add README.md
           git commit -m "docs: standardize academic continuity by student and professor"
           git push origin HEAD:docs/academic-continuity-standard
+
+# adapted to current v1.0.0 README structure
