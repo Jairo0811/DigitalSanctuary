@@ -42,7 +42,7 @@
 
 ### 🧭 Continuidad académica
 
-**Digital Sanctuary** documenta su continuidad académica mediante relaciones verificables entre estudiantes y profesores. En la colección actual no se ha identificado un compañero recurrente, pero sí existe una **continuidad docente** con [**NutriFlow**](https://github.com/Jairo0811/NutriFlow).
+**Digital Sanctuary** documenta su continuidad académica mediante relaciones verificables entre estudiantes y profesores. Al tratarse de un proyecto académico individual, no existe un compañero recurrente dentro de este proyecto; la continuidad verificable corresponde al profesor **Ing. Pedro José Ramirez Rodriguez**.
 
 #### 👥 Continuidad por estudiante
 
@@ -50,14 +50,15 @@ Digital Sanctuary fue desarrollado como proyecto académico individual por **Fra
 
 #### 👨‍🏫 Continuidad por profesor
 
-El profesor **Ing. Pedro José Ramirez Rodriguez** aparece en dos momentos distintos de la trayectoria académica documentada en UNAPEC: primero en **Bases de Datos 1 (INF-164)**, donde surgió el prototipo que posteriormente evolucionó hacia NutriFlow, y dos años después en **Desarrollo de Software con Tecnología Propietaria 2 (ISO-710)** con Digital Sanctuary.
+Digital Sanctuary cierra una secuencia docente de **tres proyectos** desarrollados en diferentes etapas de la carrera con el profesor **Ing. Pedro José Ramirez Rodriguez**.
 
 | Orden | Asignatura | Proyecto | Período | Profesor |
 |---:|---|---|---|---|
 | 1 | Bases de Datos 1 (INF-164) | [**NutriFlow**](https://github.com/Jairo0811/NutriFlow) | Mayo - Agosto 2024 | **Ing. Pedro José Ramirez Rodriguez** |
-| 2 | Desarrollo de Software con Tecnología Propietaria 2 (ISO-710) | **Digital Sanctuary** | Mayo - Agosto 2026 | **Ing. Pedro José Ramirez Rodriguez** |
+| 2 | Fundamentos de Seguridad de Software (ISO-915) | [**CertiChain**](https://github.com/Jairo0811/CertiChain) | Septiembre - Diciembre 2025 | **Ing. Pedro José Ramirez Rodriguez** |
+| 3 | Desarrollo de Software con Tecnología Propietaria 2 (ISO-710) | **Digital Sanctuary** | Mayo - Agosto 2026 | **Ing. Pedro José Ramirez Rodriguez** |
 
-La relación es **formativa y cronológica**: los proyectos son independientes y la continuidad se fundamenta en el mismo profesor en dos etapas diferentes de la carrera.
+La secuencia es **formativa y cronológica**: parte de fundamentos de datos y modelado, continúa con seguridad de software y blockchain, y culmina en una aplicación Android nativa orientada a lectura, conocimiento e integración de IA. Los tres proyectos son independientes y no constituyen dependencias técnicas ni versiones de una misma aplicación.
 
 ---
 
