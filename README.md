@@ -52,11 +52,11 @@ Digital Sanctuary fue desarrollado como proyecto académico individual por **Fra
 
 Digital Sanctuary cierra una secuencia docente de **tres proyectos** desarrollados en diferentes etapas de la carrera con el profesor **Ing. Pedro José Ramirez Rodriguez**.
 
-| Orden | Asignatura | Proyecto | Período | Profesor |
-|---:|---|---|---|---|
-| 1 | Bases de Datos 1 (INF-164) | [**NutriFlow**](https://github.com/Jairo0811/NutriFlow) | Mayo - Agosto 2024 | **Ing. Pedro José Ramirez Rodriguez** |
-| 2 | Fundamentos de Seguridad de Software (ISO-915) | [**CertiChain**](https://github.com/Jairo0811/CertiChain) | Septiembre - Diciembre 2025 | **Ing. Pedro José Ramirez Rodriguez** |
-| 3 | Desarrollo de Software con Tecnología Propietaria 2 (ISO-710) | **Digital Sanctuary** | Mayo - Agosto 2026 | **Ing. Pedro José Ramirez Rodriguez** |
+| Orden | Asignatura | Proyecto | Período |
+|---:|---|---|---|
+| 1 | Bases de Datos 1 (INF-164) | [**NutriFlow**](https://github.com/Jairo0811/NutriFlow) | Mayo - Agosto 2024 |
+| 2 | Fundamentos de Seguridad de Software (ISO-915) | [**CertiChain**](https://github.com/Jairo0811/CertiChain) | Septiembre - Diciembre 2025 |
+| 3 | Desarrollo de Software con Tecnología Propietaria 2 (ISO-710) | **Digital Sanctuary** | Mayo - Agosto 2026 |
 
 La secuencia es **formativa y cronológica**: parte de fundamentos de datos y modelado, continúa con seguridad de software y blockchain, y culmina en una aplicación Android nativa orientada a lectura, conocimiento e integración de IA. Los tres proyectos son independientes y no constituyen dependencias técnicas ni versiones de una misma aplicación.
 
