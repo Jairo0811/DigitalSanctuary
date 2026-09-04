@@ -28,13 +28,24 @@ jobs:
       - name: Run unit tests
         run: ./gradlew testDebugUnitTest --stacktrace
 
+      - name: Verify Room schema is committed
+        shell: bash
+        run: |
+          schema_status="$(git status --porcelain -- app/schemas)"
+          if [ -n "$schema_status" ]; then
+            echo "Room schema files are not synchronized with the source model:" >&2
+            echo "$schema_status" >&2
+            exit 1
+          fi
+          test -f app/schemas/com.jairomatias.digitalsanctuary.data.AppDatabase/4.json
+
       - name: Build debug APK
         run: ./gradlew assembleDebug --stacktrace
 
       - name: Upload debug APK
         uses: actions/upload-artifact@v4
         with:
-          name: digital-sanctuary-v1.1.0-debug-apk
+          name: digital-sanctuary-v1.1.1-debug-apk
           path: app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
           retention-days: 14
