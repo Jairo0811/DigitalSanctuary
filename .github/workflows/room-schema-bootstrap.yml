@@ -1,0 +1,90 @@
+name: Room schema bootstrap
+
+on:
+  push:
+    branches: [ "chore/v1.1.1-room-schema-audit" ]
+
+permissions:
+  contents: write
+
+jobs:
+  bootstrap:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout schema branch
+        uses: actions/checkout@v4
+        with:
+          ref: chore/v1.1.1-room-schema-audit
+          fetch-depth: 0
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Configure Room 2.8.4 and schema export
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          catalog = Path('gradle/libs.versions.toml')
+          text = catalog.read_text()
+          text = text.replace('roomRuntime = "2.7.0"', 'roomRuntime = "2.8.4"')
+          text = text.replace('roomKtx = "2.7.0"', 'roomKtx = "2.8.4"')
+          text = text.replace('roomCompiler = "2.7.0"', 'roomCompiler = "2.8.4"')
+          marker = 'google-devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "googleDevtoolsKsp" }\n'
+          room_plugin = 'room = { id = "androidx.room", version.ref = "roomRuntime" }\n'
+          if room_plugin not in text:
+              text = text.replace(marker, marker + room_plugin)
+          catalog.write_text(text)
+
+          build = Path('app/build.gradle.kts')
+          text = build.read_text()
+          ksp_alias = '  alias(libs.plugins.google.devtools.ksp)\n'
+          room_alias = '  alias(libs.plugins.room)\n'
+          if room_alias not in text:
+              text = text.replace(ksp_alias, ksp_alias + room_alias)
+          text = text.replace('versionCode = 110', 'versionCode = 111')
+          text = text.replace('versionName = "1.1.0"', 'versionName = "1.1.1"')
+          room_block = 'room {\n  schemaDirectory("$projectDir/schemas")\n}\n\n'
+          if room_block not in text:
+              text = text.replace('dependencies {\n', room_block + 'dependencies {\n')
+          build.write_text(text)
+
+          database = Path('app/src/main/java/com/jairomatias/digitalsanctuary/data/AppDatabase.kt')
+          text = database.read_text().replace('exportSchema = false', 'exportSchema = true')
+          database.write_text(text)
+
+          ci = Path('.github/workflows/android-ci.yml')
+          text = ci.read_text().replace('digital-sanctuary-v1.1.0-debug-apk', 'digital-sanctuary-v1.1.1-debug-apk')
+          verify = '''      - name: Verify Room schema is committed\n        shell: bash\n        run: |\n          schema_status="$(git status --porcelain -- app/schemas)"\n          if [ -n "$schema_status" ]; then\n            echo "Room schema files are not synchronized with source:" >&2\n            echo "$schema_status" >&2\n            exit 1\n          fi\n\n'''
+          build_step = '      - name: Build debug APK\n'
+          if 'Verify Room schema is committed' not in text:
+              text = text.replace(build_step, verify + build_step)
+          ci.write_text(text)
+          PY
+
+      - name: Generate and validate Room schema
+        run: |
+          ./gradlew testDebugUnitTest --stacktrace
+          ./gradlew assembleDebug --stacktrace
+          find app/schemas -type f -print
+          test -n "$(find app/schemas -type f -name '*.json' -print -quit)"
+
+      - name: Commit generated schema and remove bootstrap workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          git rm .github/workflows/room-schema-bootstrap.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "chore: version Room schema and upgrade Room to 2.8.4"
+          git push origin HEAD:chore/v1.1.1-room-schema-audit
