@@ -136,7 +136,7 @@ fun SettingsScreen(
                     )
                 }
 
-                Divider(color = MaterialTheme.colorScheme.surfaceVariant, modifier = Modifier.padding(horizontal = 16.dp))
+                HorizontalDivider(color = MaterialTheme.colorScheme.surfaceVariant, modifier = Modifier.padding(horizontal = 16.dp))
 
                 // Item 2: Animation Duration Range slider
                 Column(
@@ -205,7 +205,7 @@ fun SettingsScreen(
                     }
                 }
 
-                Divider(color = MaterialTheme.colorScheme.surfaceVariant, modifier = Modifier.padding(horizontal = 16.dp))
+                HorizontalDivider(color = MaterialTheme.colorScheme.surfaceVariant, modifier = Modifier.padding(horizontal = 16.dp))
 
                 // Item 3: UI Bleach Level Option Row
                 Column(
@@ -342,7 +342,7 @@ fun SettingsScreen(
                         }
 
                         if (idx < refreshOptions.lastIndex) {
-                            Divider(color = MaterialTheme.colorScheme.surfaceVariant, modifier = Modifier.padding(horizontal = 16.dp))
+                            HorizontalDivider(color = MaterialTheme.colorScheme.surfaceVariant, modifier = Modifier.padding(horizontal = 16.dp))
                         }
                     }
                 }
