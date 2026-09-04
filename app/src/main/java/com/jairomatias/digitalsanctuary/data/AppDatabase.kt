@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 @Database(
     entities = [Book::class, Annotation::class, Bookmark::class, KnowledgeLink::class, AppSetting::class],
     version = 4,
-    exportSchema = false
+    exportSchema = true
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun appDao(): AppDao

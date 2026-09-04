@@ -4,6 +4,7 @@ plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.kotlin.compose)
   alias(libs.plugins.google.devtools.ksp)
+  alias(libs.plugins.room)
   alias(libs.plugins.roborazzi)
 }
 
@@ -27,8 +28,8 @@ android {
     applicationId = "com.jairomatias.digitalsanctuary"
     minSdk = 24
     targetSdk = 36
-    versionCode = 110
-    versionName = "1.1.0"
+    versionCode = 111
+    versionName = "1.1.1"
 
     buildConfigField("String", "AI_PROXY_URL", quotedBuildConfig(projectSecret("AI_PROXY_URL")))
     buildConfigField("String", "GEMINI_API_KEY", "\"\"")
@@ -67,6 +68,10 @@ android {
     buildConfig = true
   }
   testOptions { unitTests { isIncludeAndroidResources = true } }
+}
+
+room {
+  schemaDirectory("$projectDir/schemas")
 }
 
 dependencies {
