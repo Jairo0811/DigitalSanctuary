@@ -2,6 +2,22 @@
 
 All notable changes to Digital Sanctuary are documented in this file.
 
+## 1.1.1 - 2026-09-04
+
+### Changed
+
+- Upgraded Room runtime, KTX, compiler and Gradle plugin from 2.7.0 to 2.8.4.
+- Enabled Room schema export and configured `app/schemas` as the versioned schema directory.
+- Added the generated Room schema v4 JSON to source control for auditable migration history.
+- Bumped Android version metadata to `versionCode 111` / `versionName 1.1.1`.
+- Updated the debug APK artifact name to `digital-sanctuary-v1.1.1-debug-apk`.
+
+### CI / database safety
+
+- Added a CI guard that fails when Room/KSP changes `app/schemas` without the resulting schema being committed.
+- CI also verifies that the current `AppDatabase/4.json` schema artifact exists before assembling the APK.
+- Revalidated the existing schema-v3-to-v4 migration and full Android build against Room 2.8.4.
+
 ## 1.1.0 - 2026-09-04
 
 ### Added
