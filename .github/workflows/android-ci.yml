@@ -3,7 +3,7 @@ name: Android CI
 on:
   workflow_dispatch:
   push:
-    branches: [ main, "agent/**", "chore/**" ]
+    branches: [ main, "agent/**", "chore/**", "feature/**" ]
   pull_request:
     branches: [ main ]
 
@@ -34,7 +34,7 @@ jobs:
       - name: Upload debug APK
         uses: actions/upload-artifact@v4
         with:
-          name: digital-sanctuary-v1.0.1-debug-apk
+          name: digital-sanctuary-v1.1.0-debug-apk
           path: app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
           retention-days: 14
