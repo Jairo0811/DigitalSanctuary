@@ -2,9 +2,22 @@ package com.jairomatias.digitalsanctuary.data
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
+import androidx.room.Index
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "annotations")
+@Entity(
+    tableName = "annotations",
+    foreignKeys = [
+        ForeignKey(
+            entity = Book::class,
+            parentColumns = ["id"],
+            childColumns = ["bookId"],
+            onDelete = ForeignKey.CASCADE
+        )
+    ],
+    indices = [Index(value = ["bookId"])]
+)
 data class Annotation(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val bookId: String,
