@@ -187,9 +187,7 @@ object ReaderEngine {
         return filename.ifBlank { "Chapter $index" }
     }
 
-    private companion object {
-        const val MAX_EPUB_ENTRY_BYTES = 2 * 1024 * 1024
-        const val MAX_EPUB_CHAPTERS = 500
-        const val MIN_CHAPTER_TEXT_LENGTH = 40
-    }
+    private const val MAX_EPUB_ENTRY_BYTES = 2 * 1024 * 1024
+    private const val MAX_EPUB_CHAPTERS = 500
+    private const val MIN_CHAPTER_TEXT_LENGTH = 40
 }
