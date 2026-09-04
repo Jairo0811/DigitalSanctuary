@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Version-1.1.0-111827?style=for-the-badge" alt="Version 1.1.0">
+  <img src="https://img.shields.io/badge/Version-1.1.1-111827?style=for-the-badge" alt="Version 1.1.1">
   <img src="https://img.shields.io/badge/Estado-Roadmap%20completado-16A34A?style=for-the-badge" alt="Roadmap completado">
   <img src="https://img.shields.io/badge/Plataforma-Android-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Android">
 </p>
@@ -53,6 +53,27 @@ Los tres proyectos son independientes y representan una continuidad **formativa 
 
 ---
 
+## 🛠️ Mantenimiento v1.1.1
+
+La versión **1.1.1** cierra la deuda de auditoría de esquemas Room introducida tras la migración de persistencia de v1.1.0.
+
+### Room y schemas auditables
+
+- Room runtime, KTX, compiler y Gradle Plugin actualizados a **2.8.4**.
+- `exportSchema = true` habilitado en `AppDatabase`.
+- Directorio de schemas configurado explícitamente en `app/schemas` mediante el Room Gradle Plugin.
+- Schema actual `AppDatabase/4.json` generado por Room/KSP y versionado en Git.
+- El historial de migraciones continúa siendo no destructivo; el schema exportado permite auditar cambios futuros contra la estructura esperada por Room.
+
+### CI y release
+
+- CI ejecuta la suite y posteriormente comprueba que `app/schemas` no haya quedado modificado o con archivos nuevos sin versionar.
+- El pipeline exige la existencia del schema v4 antes de construir el APK.
+- `versionCode` **111** y `versionName` **1.1.1**.
+- Artifact de prueba: `digital-sanctuary-v1.1.1-debug-apk`.
+
+---
+
 ## 🚀 Evolución v1.1.0
 
 La versión **1.1.0** fortalece la aplicación después del cierre del roadmap funcional original.
@@ -79,7 +100,7 @@ La versión **1.1.0** fortalece la aplicación después del cierre del roadmap f
 
 - `versionCode` **110** y `versionName` **1.1.0**.
 - Android CI también valida ramas `feature/**`.
-- Artifact de prueba: `digital-sanctuary-v1.1.0-debug-apk`.
+- Artifact de prueba de esa versión: `digital-sanctuary-v1.1.0-debug-apk`.
 
 ---
 
@@ -196,6 +217,7 @@ Principios aplicados:
 - operaciones de I/O con Coroutines;
 - persistencia mediante migraciones explícitas;
 - integridad referencial con foreign keys y cascadas;
+- schemas Room versionados para auditoría de migraciones;
 - integración de IA detrás de una abstracción intercambiable;
 - credenciales fuera del control de versiones.
 
@@ -203,7 +225,7 @@ Principios aplicados:
 
 ## 🗄️ Modelo persistente
 
-Room se encuentra en **schema version 4** y conserva migraciones explícitas:
+Room **2.8.4** se encuentra en **schema version 4** y conserva migraciones explícitas:
 
 ```text
 v1 → v2
@@ -225,6 +247,12 @@ Entidades principales:
 - `Bookmark`
 - `KnowledgeLink`
 - `AppSetting`
+
+El schema actual generado por Room se versiona en:
+
+```text
+app/schemas/com.jairomatias.digitalsanctuary.data.AppDatabase/4.json
+```
 
 No se utiliza migración destructiva como estrategia normal de actualización.
 
@@ -250,9 +278,11 @@ No se utiliza migración destructiva como estrategia normal de actualización.
 
 ### 🗄️ Datos
 
-- Room
+- Room 2.8.4
+- Room Gradle Plugin
 - SQLite
 - KSP
+- Schemas versionados
 - Migraciones explícitas
 - Foreign keys y cascadas
 
@@ -270,6 +300,7 @@ No se utiliza migración destructiva como estrategia normal de actualización.
 - Roborazzi
 - MockWebServer
 - Pruebas reales de migración SQLite/Room
+- Verificación de drift de schema Room en CI
 - Gradle Wrapper 9.3.1
 - JDK 21
 - GitHub Actions
@@ -282,10 +313,11 @@ El workflow `Android CI` valida cambios sobre `main`, ramas `agent/**`, `chore/*
 
 ```bash
 ./gradlew testDebugUnitTest --stacktrace
+# comprobación de que app/schemas sigue sincronizado
 ./gradlew assembleDebug --stacktrace
 ```
 
-La suite cubre lógica de negocio, Robolectric, regresión visual, red/IA, integridad de Room, migración v3→v4 y Reader EPUB. El pipeline genera además un APK debug para smoke testing en dispositivo.
+La suite cubre lógica de negocio, Robolectric, regresión visual, red/IA, integridad de Room, migración v3→v4 y Reader EPUB. Después de ejecutar Room/KSP, CI verifica que el schema generado coincida con los JSON versionados; un cambio no documentado en `app/schemas` hace fallar el pipeline. El pipeline genera además un APK debug para smoke testing en dispositivo.
 
 ---
 
@@ -301,7 +333,7 @@ La suite cubre lógica de negocio, Robolectric, regresión visual, red/IA, integ
 
 **Roadmap funcional v1.0.0 completado.**
 
-Las mejoras posteriores se gestionan mediante versionado semántico. v1.0.1 fue mantenimiento técnico/seguridad y v1.1.0 fortalece Reader y persistencia sin reabrir fases académicas ya cerradas.
+Las mejoras posteriores se gestionan mediante versionado semántico. v1.0.1 fue mantenimiento técnico/seguridad; v1.1.0 fortaleció Reader y persistencia; y v1.1.1 añade auditoría reproducible de schemas Room sin reabrir fases académicas ya cerradas.
 
 ---
 
@@ -310,8 +342,9 @@ Las mejoras posteriores se gestionan mediante versionado semántico. v1.0.1 fue 
 ```text
 Application ID: com.jairomatias.digitalsanctuary
 Namespace:      com.jairomatias.digitalsanctuary
-Version:        1.1.0
-Version code:   110
+Version:        1.1.1
+Version code:   111
+Room:           2.8.4
 Room schema:    4
 ```
 
