@@ -2,6 +2,25 @@
 
 All notable changes to Digital Sanctuary are documented in this file.
 
+## 1.1.0 - 2026-09-04
+
+### Added
+
+- Added Room integrity tests covering book/annotation/bookmark/knowledge-link cascades.
+- Added an explicit migration test that opens a handcrafted schema v3 database through Room v4.
+- Added ReaderEngine regression coverage with generated EPUB fixtures, malformed EPUB handling and oversized XHTML protection.
+
+### Changed
+
+- Bumped the Room schema from v3 to v4 with referential integrity between books, annotations, bookmarks and knowledge links.
+- Added non-destructive `MIGRATION_3_4`, preserving valid relationships and discarding only orphan rows that cannot satisfy the new foreign keys.
+- Added cascade deletion from books to annotations/bookmarks and from annotations to knowledge links.
+- Hardened EPUB parsing with a 2 MiB per-entry limit and a 500 chapter ceiling.
+- Hardened PDF metadata/rendering paths so invalid or unavailable documents fail safely instead of propagating reader exceptions.
+- Extended Android CI push validation to `feature/**` branches.
+- Bumped Android version metadata to `versionCode 110` / `versionName 1.1.0`.
+- Updated the debug APK artifact name to `digital-sanctuary-v1.1.0-debug-apk`.
+
 ## 1.0.1 - 2026-09-04
 
 ### Changed

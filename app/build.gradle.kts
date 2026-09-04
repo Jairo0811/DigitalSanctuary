@@ -27,8 +27,8 @@ android {
     applicationId = "com.jairomatias.digitalsanctuary"
     minSdk = 24
     targetSdk = 36
-    versionCode = 101
-    versionName = "1.0.1"
+    versionCode = 110
+    versionName = "1.1.0"
 
     buildConfigField("String", "AI_PROXY_URL", quotedBuildConfig(projectSecret("AI_PROXY_URL")))
     buildConfigField("String", "GEMINI_API_KEY", "\"\"")

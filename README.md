@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Version-1.0.1-111827?style=for-the-badge" alt="Version 1.0.1">
+  <img src="https://img.shields.io/badge/Version-1.1.0-111827?style=for-the-badge" alt="Version 1.1.0">
   <img src="https://img.shields.io/badge/Estado-Roadmap%20completado-16A34A?style=for-the-badge" alt="Roadmap completado">
   <img src="https://img.shields.io/badge/Plataforma-Android-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Android">
 </p>
@@ -41,15 +41,7 @@
 
 ### 🧭 Continuidad académica
 
-**Digital Sanctuary** documenta su continuidad académica mediante relaciones verificables entre estudiantes y profesores. Al tratarse de un proyecto académico individual, no existe un compañero recurrente dentro de este proyecto; la continuidad verificable corresponde al profesor **Ing. Pedro José Ramirez Rodriguez**.
-
-#### 👥 Continuidad por estudiante
-
-Digital Sanctuary fue desarrollado como proyecto académico individual por **Francis Jairo Matías Rosario (A00115261)**. Por esa razón, no existe un equipo de compañeros dentro de este proyecto que pueda utilizarse para establecer una continuidad estudiantil con otro repositorio.
-
-#### 👨‍🏫 Continuidad por profesor
-
-Digital Sanctuary cierra una secuencia docente de **tres proyectos** desarrollados en diferentes etapas de la carrera con el profesor **Ing. Pedro José Ramirez Rodriguez**.
+Digital Sanctuary fue desarrollado como proyecto académico individual por **Francis Jairo Matías Rosario (A00115261)**. La continuidad verificable se establece mediante el profesor **Ing. Pedro José Ramirez Rodriguez**, con quien existe una secuencia de tres proyectos académicos:
 
 | Orden | Asignatura | Proyecto | Período |
 |---:|---|---|---|
@@ -57,27 +49,41 @@ Digital Sanctuary cierra una secuencia docente de **tres proyectos** desarrollad
 | 2 | Fundamentos de Seguridad de Software (ISO-915) | [**CertiChain**](https://github.com/Jairo0811/CertiChain) | Septiembre - Diciembre 2025 |
 | 3 | Desarrollo de Software con Tecnología Propietaria 2 (ISO-710) | **Digital Sanctuary** | Mayo - Agosto 2026 |
 
-La secuencia es **formativa y cronológica**: parte de fundamentos de datos y modelado, continúa con seguridad de software y blockchain, y culmina en una aplicación Android nativa orientada a lectura, conocimiento e integración de IA. Los tres proyectos son independientes y no constituyen dependencias técnicas ni versiones de una misma aplicación.
+Los tres proyectos son independientes y representan una continuidad **formativa y cronológica**, no versiones técnicas de una misma aplicación.
 
 ---
 
-## 🛠️ Mantenimiento v1.0.1
+## 🚀 Evolución v1.1.0
 
-La versión **1.0.1** conserva intacto el alcance funcional de v1.0.0 y corrige deuda técnica detectada después del cierre del roadmap:
+La versión **1.1.0** fortalece la aplicación después del cierre del roadmap funcional original.
 
-- paquetes Kotlin migrados de `com.example.*` al namespace definitivo `com.jairomatias.digitalsanctuary.*`;
-- Gradle Wrapper versionado para builds reproducibles (`gradlew` / `gradlew.bat`);
-- CI migrado para compilar y probar mediante `./gradlew`;
-- `versionCode` 101 y `versionName` 1.0.1;
-- backups automáticos de datos locales desactivados por privacidad;
-- reglas explícitas de exclusión para cloud backup y device transfer;
-- cliente de IA con timeouts de conexión, escritura, lectura y llamada total;
-- configuración de proxy/API inyectable para pruebas;
-- pruebas HTTP del asistente de IA con `MockWebServer`.
+### Integridad de datos
+
+- Room actualizado de **schema v3 a v4**.
+- Foreign keys entre `Book`, `Annotation`, `Bookmark` y `KnowledgeLink`.
+- Eliminación en cascada de notas y bookmarks al borrar un libro.
+- Eliminación en cascada de knowledge links al borrar sus anotaciones.
+- `MIGRATION_3_4` no destructiva: conserva relaciones válidas y descarta únicamente filas huérfanas incompatibles con las nuevas restricciones.
+- Prueba de migración que crea una base SQLite v3 real y la abre mediante Room v4.
+
+### Reader hardening
+
+- EPUB corruptos o ilegibles ya no propagan excepciones hacia la UI.
+- Entradas XHTML/HTML limitadas a **2 MiB** para reducir riesgo de consumo de memoria excesivo.
+- Límite defensivo de **500 capítulos** por EPUB.
+- EPUB sin contenido legible muestran un fallback controlado.
+- PDF inválidos, inaccesibles o sin páginas fallan de forma segura.
+- Nuevas pruebas Robolectric generan EPUB válidos, corruptos y sobredimensionados en tiempo de ejecución.
+
+### Ingeniería
+
+- `versionCode` **110** y `versionName` **1.1.0**.
+- Android CI también valida ramas `feature/**`.
+- Artifact de prueba: `digital-sanctuary-v1.1.0-debug-apk`.
 
 ---
 
-## ✨ Capacidades de v1.0.0
+## ✨ Capacidades principales
 
 ### 📚 Library Management
 
@@ -94,13 +100,13 @@ La versión **1.0.1** conserva intacto el alcance funcional de v1.0.0 y corrige 
 
 - Importación mediante Android Storage Access Framework.
 - Soporte para **EPUB** y **PDF**.
-- EPUB procesado localmente desde XHTML/HTML contenido en el archivo.
+- EPUB procesado localmente desde XHTML/HTML.
 - PDF renderizado con `PdfRenderer` nativo de Android.
 - Navegación por capítulos o páginas.
 - Posición y progreso persistentes.
 - Marcadores por ubicación.
 - Notas vinculadas a la ubicación de lectura.
-- Ajustes de tamaño de texto y experiencia visual orientada a lectura tranquila/e-ink.
+- Ajustes visuales orientados a lectura tranquila/e-ink.
 
 ### 🧠 Knowledge Hub
 
@@ -109,7 +115,7 @@ La versión **1.0.1** conserva intacto el alcance funcional de v1.0.0 y corrige 
 - Búsqueda global sobre biblioteca y conocimiento.
 - Relaciones entre notas mediante enlaces persistentes.
 - Conteo de conexiones.
-- Exportación de la base de conocimiento a Markdown mediante Android Share Sheet.
+- Exportación a Markdown mediante Android Share Sheet.
 - Creación de conocimiento directamente desde el Reader.
 
 ### ✨ Gemini AI Assistance
@@ -119,10 +125,10 @@ La versión **1.0.1** conserva intacto el alcance funcional de v1.0.0 y corrige 
 - Explicación de conceptos.
 - Extracción de insights.
 - Síntesis contextual de notas guardadas.
-- Guardado de respuestas útiles como `AI Insight` dentro del Knowledge Hub.
+- Guardado de respuestas útiles como `AI Insight`.
 - Límite de contexto para evitar solicitudes excesivas.
 
-> Los PDF se renderizan localmente. La versión actual **no extrae ni envía automáticamente el contenido visual de páginas PDF a Gemini**.
+> Los PDF se renderizan localmente. La aplicación **no extrae ni envía automáticamente el contenido visual de páginas PDF a Gemini**.
 
 ---
 
@@ -130,7 +136,7 @@ La versión **1.0.1** conserva intacto el alcance funcional de v1.0.0 y corrige 
 
 Digital Sanctuary no requiere una credencial Gemini dentro del repositorio.
 
-La configuración recomendada para producción es:
+Configuración recomendada para producción:
 
 ```env
 AI_PROXY_URL=https://tu-backend.example.com/ai
@@ -138,22 +144,21 @@ AI_PROXY_URL=https://tu-backend.example.com/ai
 
 El backend/proxy conserva la credencial real y el APK únicamente conoce el endpoint.
 
-Para desarrollo local existe un fallback opcional:
+Fallback opcional para desarrollo local:
 
 ```env
 GEMINI_API_KEY=tu_clave_local
 ```
 
-Ese fallback se compila **solo en builds `debug`**. Los builds `release` mantienen `GEMINI_API_KEY` vacío y deben utilizar `AI_PROXY_URL`.
+`GEMINI_API_KEY` se compila únicamente en builds `debug`; los builds `release` mantienen esa clave vacía.
 
-A partir de v1.0.1:
+Protecciones vigentes:
 
-- Android Auto Backup se mantiene desactivado para evitar que biblioteca, progreso, notas y Knowledge Hub salgan del dispositivo sin una política de sincronización explícita;
-- `backup_rules.xml` y `data_extraction_rules.xml` excluyen almacenamiento interno, preferencias y base de datos;
-- el cliente HTTP de IA aplica límites temporales para evitar llamadas bloqueadas indefinidamente;
-- las respuestas de error de proxy/Gemini se convierten en `AiResult.Error` y no derriban el flujo principal.
-
-Nunca se deben versionar `.env`, keystores ni credenciales reales.
+- Android Auto Backup desactivado para biblioteca, progreso, notas y Knowledge Hub.
+- Reglas explícitas de exclusión para cloud backup y device transfer.
+- Timeouts de conexión, escritura, lectura y llamada total para IA.
+- Errores de proxy/Gemini convertidos en `AiResult.Error`.
+- Credenciales, `.env` y keystores fuera del control de versiones.
 
 ---
 
@@ -190,6 +195,7 @@ Principios aplicados:
 - estado reactivo con StateFlow;
 - operaciones de I/O con Coroutines;
 - persistencia mediante migraciones explícitas;
+- integridad referencial con foreign keys y cascadas;
 - integración de IA detrás de una abstracción intercambiable;
 - credenciales fuera del control de versiones.
 
@@ -197,7 +203,7 @@ Principios aplicados:
 
 ## 🗄️ Modelo persistente
 
-Room se encuentra en **schema version 3** y conserva migraciones explícitas:
+Room se encuentra en **schema version 4** y conserva migraciones explícitas:
 
 ```text
 v1 → v2
@@ -206,6 +212,10 @@ Biblioteca avanzada, estados y metadatos
 v2 → v3
 Documentos reales, posición de lectura,
 tags, bookmarks y knowledge links
+
+v3 → v4
+Integridad referencial, foreign keys,
+cascadas y limpieza controlada de huérfanos
 ```
 
 Entidades principales:
@@ -216,22 +226,13 @@ Entidades principales:
 - `KnowledgeLink`
 - `AppSetting`
 
-No se utiliza migración destructiva como estrategia de actualización.
+No se utiliza migración destructiva como estrategia normal de actualización.
 
 ---
 
 ## 🧱 Stack tecnológico
 
 ### 📱 Android / Frontend
-
-<p>
-  <img src="https://skillicons.dev/icons?i=kotlin,androidstudio" alt="Kotlin y Android Studio" />
-</p>
-
-<p>
-  <img src="https://img.shields.io/badge/Jetpack%20Compose-4285F4?style=flat-square&logo=jetpackcompose&logoColor=white" alt="Jetpack Compose" />
-  <img src="https://img.shields.io/badge/Material%203-6750A4?style=flat-square&logo=materialdesign&logoColor=white" alt="Material 3" />
-</p>
 
 - Kotlin
 - Jetpack Compose
@@ -241,52 +242,34 @@ No se utiliza migración destructiva como estrategia de actualización.
 
 ### ⚙️ Servicios e integración
 
-<p>
-  <img src="https://img.shields.io/badge/Retrofit-HTTP-48B983?style=flat-square" alt="Retrofit" />
-  <img src="https://img.shields.io/badge/OkHttp-HTTP-3E4348?style=flat-square" alt="OkHttp" />
-  <img src="https://img.shields.io/badge/Moshi-JSON-7C4DFF?style=flat-square" alt="Moshi" />
-</p>
-
 - Repository Pattern
 - Retrofit, OkHttp y Moshi
 - Android Storage Access Framework
 - `PdfRenderer`
 - EPUB mediante ZIP/XHTML
-- **No requiere un backend propio obligatorio** para biblioteca, lector o conocimiento local.
 
 ### 🗄️ Datos
-
-<p>
-  <img src="https://skillicons.dev/icons?i=sqlite" alt="SQLite" />
-  <img src="https://img.shields.io/badge/Room-3DDC84?style=flat-square&logo=android&logoColor=white" alt="Room" />
-</p>
 
 - Room
 - SQLite
 - KSP
 - Migraciones explícitas
+- Foreign keys y cascadas
 
 ### 🤖 IA
 
-<p>
-  <img src="https://img.shields.io/badge/Google%20Gemini-8E75B2?style=flat-square&logo=googlegemini&logoColor=white" alt="Google Gemini" />
-</p>
-
-- Google Gemini mediante la abstracción `AiAssistant`
+- Google Gemini mediante `AiAssistant`
 - AI Proxy opcional para producción
 - Gemini directo únicamente como fallback de desarrollo
 
 ### 🧪 Testing y DevOps
 
-<p>
-  <img src="https://skillicons.dev/icons?i=gradle,git,github,githubactions" alt="Gradle, Git, GitHub y GitHub Actions" />
-</p>
-
 - JUnit
-- Robolectric
+- Robolectric SDK 36
 - Compose UI Test
 - Roborazzi
 - MockWebServer
+- Pruebas reales de migración SQLite/Room
 - Gradle Wrapper 9.3.1
 - JDK 21
 - GitHub Actions
@@ -295,14 +278,14 @@ No se utiliza migración destructiva como estrategia de actualización.
 
 ## 🧪 Calidad y CI
 
-El workflow `Android CI` valida cambios sobre `main`, ramas `agent/**`, ramas `chore/**` y pull requests hacia `main` mediante el Gradle Wrapper versionado:
+El workflow `Android CI` valida cambios sobre `main`, ramas `agent/**`, `chore/**`, `feature/**` y pull requests hacia `main` mediante:
 
 ```bash
 ./gradlew testDebugUnitTest --stacktrace
 ./gradlew assembleDebug --stacktrace
 ```
 
-La suite incluye pruebas unitarias, Robolectric, regresión visual con Roborazzi y pruebas HTTP del asistente de IA mediante MockWebServer. El pipeline genera además un APK debug como artifact para smoke testing en dispositivo.
+La suite cubre lógica de negocio, Robolectric, regresión visual, red/IA, integridad de Room, migración v3→v4 y Reader EPUB. El pipeline genera además un APK debug para smoke testing en dispositivo.
 
 ---
 
@@ -318,7 +301,7 @@ La suite incluye pruebas unitarias, Robolectric, regresión visual con Roborazzi
 
 **Roadmap funcional v1.0.0 completado.**
 
-Las mejoras posteriores se gestionan como nuevas versiones y no como fases pendientes del roadmap académico original. La v1.0.1 es una versión de mantenimiento técnico y seguridad.
+Las mejoras posteriores se gestionan mediante versionado semántico. v1.0.1 fue mantenimiento técnico/seguridad y v1.1.0 fortalece Reader y persistencia sin reabrir fases académicas ya cerradas.
 
 ---
 
@@ -327,13 +310,12 @@ Las mejoras posteriores se gestionan como nuevas versiones y no como fases pendi
 ```text
 Application ID: com.jairomatias.digitalsanctuary
 Namespace:      com.jairomatias.digitalsanctuary
-Version:        1.0.1
-Version code:   101
+Version:        1.1.0
+Version code:   110
+Room schema:    4
 ```
 
-El árbol de código también utiliza ahora el namespace definitivo `com.jairomatias.digitalsanctuary.*`, eliminando los paquetes de plantilla `com.example.*`.
-
-La identidad visual del launcher utiliza una marca propia inspirada en un **libro abierto dentro de un santuario**, reemplazando los recursos genéricos iniciales de Android.
+La identidad visual del launcher utiliza una marca propia inspirada en un **libro abierto dentro de un santuario**.
 
 ---
 
@@ -342,30 +324,30 @@ La identidad visual del launcher utiliza una marca propia inspirada en un **libr
 Requisitos recomendados:
 
 - Android Studio compatible con el stack actual;
-- JDK 21 para reproducir el entorno de CI y los tests Robolectric SDK 36;
-- dispositivo/emulador Android con API mínima 24.
+- JDK 21;
+- dispositivo/emulador Android API 24 o superior.
 
-El repositorio incluye Gradle Wrapper, por lo que no es necesario instalar una versión global de Gradle.
+El repositorio incluye Gradle Wrapper.
 
-Para compilar:
+Compilar:
 
 ```bash
 ./gradlew assembleDebug
 ```
 
-En Windows PowerShell/CMD:
+Windows PowerShell/CMD:
 
 ```powershell
 .\gradlew.bat assembleDebug
 ```
 
-Para pruebas:
+Pruebas:
 
 ```bash
 ./gradlew testDebugUnitTest
 ```
 
-La IA es opcional: sin `AI_PROXY_URL` o clave de desarrollo, el resto de Digital Sanctuary continúa funcionando y la interfaz informa que AI Assistance no está configurada.
+La IA es opcional. Sin `AI_PROXY_URL` o clave de desarrollo, biblioteca, Reader y Knowledge Hub continúan funcionando.
 
 ---
 

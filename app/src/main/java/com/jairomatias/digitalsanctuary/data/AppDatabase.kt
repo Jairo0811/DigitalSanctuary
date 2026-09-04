@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 
 @Database(
     entities = [Book::class, Annotation::class, Bookmark::class, KnowledgeLink::class, AppSetting::class],
-    version = 3,
+    version = 4,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -69,6 +69,74 @@ abstract class AppDatabase : RoomDatabase() {
             }
         }
 
+        internal val MIGRATION_3_4 = object : Migration(3, 4) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL(
+                    "CREATE TABLE IF NOT EXISTS annotations_new (" +
+                        "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                        "bookId TEXT NOT NULL, " +
+                        "type TEXT NOT NULL, " +
+                        "content TEXT NOT NULL, " +
+                        "note TEXT NOT NULL, " +
+                        "bookTitle TEXT NOT NULL, " +
+                        "bookAuthor TEXT NOT NULL, " +
+                        "locationInfo TEXT NOT NULL, " +
+                        "timestamp INTEGER NOT NULL, " +
+                        "tags TEXT NOT NULL DEFAULT '', " +
+                        "locationIndex INTEGER NOT NULL DEFAULT 0, " +
+                        "FOREIGN KEY(bookId) REFERENCES books(id) ON UPDATE NO ACTION ON DELETE CASCADE)"
+                )
+                db.execSQL(
+                    "INSERT INTO annotations_new (id, bookId, type, content, note, bookTitle, bookAuthor, locationInfo, timestamp, tags, locationIndex) " +
+                        "SELECT id, bookId, type, content, note, bookTitle, bookAuthor, locationInfo, timestamp, tags, locationIndex " +
+                        "FROM annotations WHERE bookId IN (SELECT id FROM books)"
+                )
+                db.execSQL("DROP TABLE annotations")
+                db.execSQL("ALTER TABLE annotations_new RENAME TO annotations")
+                db.execSQL("CREATE INDEX IF NOT EXISTS index_annotations_bookId ON annotations (bookId)")
+
+                db.execSQL(
+                    "CREATE TABLE IF NOT EXISTS bookmarks_new (" +
+                        "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                        "bookId TEXT NOT NULL, " +
+                        "locationIndex INTEGER NOT NULL, " +
+                        "label TEXT NOT NULL, " +
+                        "createdAt INTEGER NOT NULL, " +
+                        "FOREIGN KEY(bookId) REFERENCES books(id) ON UPDATE NO ACTION ON DELETE CASCADE)"
+                )
+                db.execSQL(
+                    "INSERT INTO bookmarks_new (id, bookId, locationIndex, label, createdAt) " +
+                        "SELECT id, bookId, locationIndex, label, createdAt " +
+                        "FROM bookmarks WHERE bookId IN (SELECT id FROM books)"
+                )
+                db.execSQL("DROP TABLE bookmarks")
+                db.execSQL("ALTER TABLE bookmarks_new RENAME TO bookmarks")
+                db.execSQL("CREATE INDEX IF NOT EXISTS index_bookmarks_bookId ON bookmarks (bookId)")
+                db.execSQL("CREATE UNIQUE INDEX IF NOT EXISTS index_bookmarks_bookId_locationIndex ON bookmarks (bookId, locationIndex)")
+
+                db.execSQL(
+                    "CREATE TABLE IF NOT EXISTS knowledge_links_new (" +
+                        "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                        "fromAnnotationId INTEGER NOT NULL, " +
+                        "toAnnotationId INTEGER NOT NULL, " +
+                        "relation TEXT NOT NULL, " +
+                        "createdAt INTEGER NOT NULL, " +
+                        "FOREIGN KEY(fromAnnotationId) REFERENCES annotations(id) ON UPDATE NO ACTION ON DELETE CASCADE, " +
+                        "FOREIGN KEY(toAnnotationId) REFERENCES annotations(id) ON UPDATE NO ACTION ON DELETE CASCADE)"
+                )
+                db.execSQL(
+                    "INSERT INTO knowledge_links_new (id, fromAnnotationId, toAnnotationId, relation, createdAt) " +
+                        "SELECT id, fromAnnotationId, toAnnotationId, relation, createdAt FROM knowledge_links " +
+                        "WHERE fromAnnotationId IN (SELECT id FROM annotations) " +
+                        "AND toAnnotationId IN (SELECT id FROM annotations)"
+                )
+                db.execSQL("DROP TABLE knowledge_links")
+                db.execSQL("ALTER TABLE knowledge_links_new RENAME TO knowledge_links")
+                db.execSQL("CREATE INDEX IF NOT EXISTS index_knowledge_links_fromAnnotationId ON knowledge_links (fromAnnotationId)")
+                db.execSQL("CREATE INDEX IF NOT EXISTS index_knowledge_links_toAnnotationId ON knowledge_links (toAnnotationId)")
+            }
+        }
+
         fun getDatabase(context: Context, scope: CoroutineScope): AppDatabase {
             return INSTANCE ?: synchronized(this) {
                 Room.databaseBuilder(
@@ -76,7 +144,7 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "digital_sanctuary_database"
                 )
-                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
+                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
                     .addCallback(AppDatabaseCallback(scope))
                     .build()
                     .also { INSTANCE = it }
