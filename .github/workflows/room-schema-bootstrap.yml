@@ -61,14 +61,6 @@ jobs:
           database = Path('app/src/main/java/com/jairomatias/digitalsanctuary/data/AppDatabase.kt')
           text = database.read_text().replace('exportSchema = false', 'exportSchema = true')
           database.write_text(text)
-
-          ci = Path('.github/workflows/android-ci.yml')
-          text = ci.read_text().replace('digital-sanctuary-v1.1.0-debug-apk', 'digital-sanctuary-v1.1.1-debug-apk')
-          verify = '''      - name: Verify Room schema is committed\n        shell: bash\n        run: |\n          schema_status="$(git status --porcelain -- app/schemas)"\n          if [ -n "$schema_status" ]; then\n            echo "Room schema files are not synchronized with source:" >&2\n            echo "$schema_status" >&2\n            exit 1\n          fi\n\n'''
-          build_step = '      - name: Build debug APK\n'
-          if 'Verify Room schema is committed' not in text:
-              text = text.replace(build_step, verify + build_step)
-          ci.write_text(text)
           PY
 
       - name: Generate and validate Room schema
@@ -78,13 +70,12 @@ jobs:
           find app/schemas -type f -print
           test -n "$(find app/schemas -type f -name '*.json' -print -quit)"
 
-      - name: Commit generated schema and remove bootstrap workflow
+      - name: Commit generated schema
         shell: bash
         run: |
           set -euo pipefail
-          git rm .github/workflows/room-schema-bootstrap.yml
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A
+          git add gradle/libs.versions.toml app/build.gradle.kts app/src/main/java/com/jairomatias/digitalsanctuary/data/AppDatabase.kt app/schemas
           git commit -m "chore: version Room schema and upgrade Room to 2.8.4"
           git push origin HEAD:chore/v1.1.1-room-schema-audit
