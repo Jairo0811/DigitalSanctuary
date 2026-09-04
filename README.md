@@ -7,10 +7,9 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Version-1.0.0-111827?style=for-the-badge" alt="Version 1.0.0">
+  <img src="https://img.shields.io/badge/Version-1.0.1-111827?style=for-the-badge" alt="Version 1.0.1">
   <img src="https://img.shields.io/badge/Estado-Roadmap%20completado-16A34A?style=for-the-badge" alt="Roadmap completado">
   <img src="https://img.shields.io/badge/Plataforma-Android-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Android">
-
 </p>
 
 <p align="center">
@@ -59,6 +58,22 @@ Digital Sanctuary cierra una secuencia docente de **tres proyectos** desarrollad
 | 3 | Desarrollo de Software con Tecnología Propietaria 2 (ISO-710) | **Digital Sanctuary** | Mayo - Agosto 2026 |
 
 La secuencia es **formativa y cronológica**: parte de fundamentos de datos y modelado, continúa con seguridad de software y blockchain, y culmina en una aplicación Android nativa orientada a lectura, conocimiento e integración de IA. Los tres proyectos son independientes y no constituyen dependencias técnicas ni versiones de una misma aplicación.
+
+---
+
+## 🛠️ Mantenimiento v1.0.1
+
+La versión **1.0.1** conserva intacto el alcance funcional de v1.0.0 y corrige deuda técnica detectada después del cierre del roadmap:
+
+- paquetes Kotlin migrados de `com.example.*` al namespace definitivo `com.jairomatias.digitalsanctuary.*`;
+- Gradle Wrapper versionado para builds reproducibles (`gradlew` / `gradlew.bat`);
+- CI migrado para compilar y probar mediante `./gradlew`;
+- `versionCode` 101 y `versionName` 1.0.1;
+- backups automáticos de datos locales desactivados por privacidad;
+- reglas explícitas de exclusión para cloud backup y device transfer;
+- cliente de IA con timeouts de conexión, escritura, lectura y llamada total;
+- configuración de proxy/API inyectable para pruebas;
+- pruebas HTTP del asistente de IA con `MockWebServer`.
 
 ---
 
@@ -111,7 +126,7 @@ La secuencia es **formativa y cronológica**: parte de fundamentos de datos y mo
 
 ---
 
-## 🔐 Seguridad de IA
+## 🔐 Seguridad y privacidad
 
 Digital Sanctuary no requiere una credencial Gemini dentro del repositorio.
 
@@ -130,6 +145,13 @@ GEMINI_API_KEY=tu_clave_local
 ```
 
 Ese fallback se compila **solo en builds `debug`**. Los builds `release` mantienen `GEMINI_API_KEY` vacío y deben utilizar `AI_PROXY_URL`.
+
+A partir de v1.0.1:
+
+- Android Auto Backup se mantiene desactivado para evitar que biblioteca, progreso, notas y Knowledge Hub salgan del dispositivo sin una política de sincronización explícita;
+- `backup_rules.xml` y `data_extraction_rules.xml` excluyen almacenamiento interno, preferencias y base de datos;
+- el cliente HTTP de IA aplica límites temporales para evitar llamadas bloqueadas indefinidamente;
+- las respuestas de error de proxy/Gemini se convierten en `AiResult.Error` y no derriban el flujo principal.
 
 Nunca se deben versionar `.env`, keystores ni credenciales reales.
 
@@ -264,7 +286,8 @@ No se utiliza migración destructiva como estrategia de actualización.
 - Robolectric
 - Compose UI Test
 - Roborazzi
-- Gradle 9.3.1
+- MockWebServer
+- Gradle Wrapper 9.3.1
 - JDK 21
 - GitHub Actions
 
@@ -272,14 +295,14 @@ No se utiliza migración destructiva como estrategia de actualización.
 
 ## 🧪 Calidad y CI
 
-El workflow `Android CI` valida cada cambio sobre `main` y ramas `agent/**` mediante:
+El workflow `Android CI` valida cambios sobre `main`, ramas `agent/**`, ramas `chore/**` y pull requests hacia `main` mediante el Gradle Wrapper versionado:
 
 ```bash
-gradle testDebugUnitTest --stacktrace
-gradle assembleDebug --stacktrace
+./gradlew testDebugUnitTest --stacktrace
+./gradlew assembleDebug --stacktrace
 ```
 
-La suite incluye pruebas unitarias, Robolectric y regresión visual con Roborazzi. El objetivo de integración es que ninguna fase se fusione a `main` sin pruebas y APK debug construidos correctamente.
+La suite incluye pruebas unitarias, Robolectric, regresión visual con Roborazzi y pruebas HTTP del asistente de IA mediante MockWebServer. El pipeline genera además un APK debug como artifact para smoke testing en dispositivo.
 
 ---
 
@@ -295,7 +318,7 @@ La suite incluye pruebas unitarias, Robolectric y regresión visual con Roborazz
 
 **Roadmap funcional v1.0.0 completado.**
 
-Las mejoras posteriores se gestionarán como nuevas versiones y no como fases pendientes del roadmap original.
+Las mejoras posteriores se gestionan como nuevas versiones y no como fases pendientes del roadmap académico original. La v1.0.1 es una versión de mantenimiento técnico y seguridad.
 
 ---
 
@@ -304,8 +327,11 @@ Las mejoras posteriores se gestionarán como nuevas versiones y no como fases pe
 ```text
 Application ID: com.jairomatias.digitalsanctuary
 Namespace:      com.jairomatias.digitalsanctuary
-Version:        1.0.0
+Version:        1.0.1
+Version code:   101
 ```
+
+El árbol de código también utiliza ahora el namespace definitivo `com.jairomatias.digitalsanctuary.*`, eliminando los paquetes de plantilla `com.example.*`.
 
 La identidad visual del launcher utiliza una marca propia inspirada en un **libro abierto dentro de un santuario**, reemplazando los recursos genéricos iniciales de Android.
 
@@ -319,16 +345,24 @@ Requisitos recomendados:
 - JDK 21 para reproducir el entorno de CI y los tests Robolectric SDK 36;
 - dispositivo/emulador Android con API mínima 24.
 
+El repositorio incluye Gradle Wrapper, por lo que no es necesario instalar una versión global de Gradle.
+
 Para compilar:
 
 ```bash
-gradle assembleDebug
+./gradlew assembleDebug
+```
+
+En Windows PowerShell/CMD:
+
+```powershell
+.\gradlew.bat assembleDebug
 ```
 
 Para pruebas:
 
 ```bash
-gradle testDebugUnitTest
+./gradlew testDebugUnitTest
 ```
 
 La IA es opcional: sin `AI_PROXY_URL` o clave de desarrollo, el resto de Digital Sanctuary continúa funcionando y la interfaz informa que AI Assistance no está configurada.

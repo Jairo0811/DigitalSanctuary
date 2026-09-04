@@ -27,8 +27,8 @@ android {
     applicationId = "com.jairomatias.digitalsanctuary"
     minSdk = 24
     targetSdk = 36
-    versionCode = 100
-    versionName = "1.0.0"
+    versionCode = 101
+    versionName = "1.0.1"
 
     buildConfigField("String", "AI_PROXY_URL", quotedBuildConfig(projectSecret("AI_PROXY_URL")))
     buildConfigField("String", "GEMINI_API_KEY", "\"\"")
@@ -103,6 +103,7 @@ dependencies {
   testImplementation(libs.roborazzi)
   testImplementation(libs.roborazzi.compose)
   testImplementation(libs.roborazzi.junit.rule)
+  testImplementation("com.squareup.okhttp3:mockwebserver:4.10.0")
   androidTestImplementation(platform(libs.androidx.compose.bom))
   androidTestImplementation(libs.androidx.compose.ui.test.junit4)
   androidTestImplementation(libs.androidx.espresso.core)
