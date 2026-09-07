@@ -39,7 +39,7 @@
 
 > La entrega universitaria original fue un prototipo académico. La implementación Android funcional, el lector real, el Knowledge Hub, las pruebas, CI y la integración de IA corresponden a la evolución posterior del concepto.
 
-### 🧭 Continuidad académica
+## 🧭 Continuidad académica
 
 Digital Sanctuary fue desarrollado como proyecto académico individual por **Francis Jairo Matías Rosario (A00115261)**. La continuidad verificable se establece mediante el profesor **Ing. Pedro José Ramirez Rodriguez**, con quien existe una secuencia de tres proyectos académicos:
 
@@ -262,6 +262,11 @@ No se utiliza migración destructiva como estrategia normal de actualización.
 
 ### 📱 Android / Frontend
 
+<p>
+  <img src="https://skillicons.dev/icons?i=kotlin,androidstudio" alt="Kotlin y Android Studio" />
+  <img src="https://img.shields.io/badge/Jetpack%20Compose-Material%203-4285F4?style=flat-square&logo=jetpackcompose&logoColor=white" alt="Jetpack Compose y Material 3" />
+</p>
+
 - Kotlin
 - Jetpack Compose
 - Material 3
@@ -270,6 +275,12 @@ No se utiliza migración destructiva como estrategia normal de actualización.
 
 ### ⚙️ Servicios e integración
 
+<p>
+  <img src="https://img.shields.io/badge/Retrofit-HTTP-48B983?style=flat-square" alt="Retrofit" />
+  <img src="https://img.shields.io/badge/OkHttp-Network-3F51B5?style=flat-square" alt="OkHttp" />
+  <img src="https://img.shields.io/badge/Moshi-JSON-6D4C41?style=flat-square" alt="Moshi" />
+</p>
+
 - Repository Pattern
 - Retrofit, OkHttp y Moshi
 - Android Storage Access Framework
@@ -277,6 +288,12 @@ No se utiliza migración destructiva como estrategia normal de actualización.
 - EPUB mediante ZIP/XHTML
 
 ### 🗄️ Datos
+
+<p>
+  <img src="https://skillicons.dev/icons?i=sqlite" alt="SQLite" />
+  <img src="https://img.shields.io/badge/Room-2.8.4-3DDC84?style=flat-square&logo=android&logoColor=white" alt="Room 2.8.4" />
+  <img src="https://img.shields.io/badge/KSP-Code%20Generation-7F52FF?style=flat-square&logo=kotlin&logoColor=white" alt="KSP" />
+</p>
 
 - Room 2.8.4
 - Room Gradle Plugin
@@ -288,11 +305,21 @@ No se utiliza migración destructiva como estrategia normal de actualización.
 
 ### 🤖 IA
 
+<p>
+  <img src="https://img.shields.io/badge/Google%20Gemini-AI-8E75B2?style=flat-square&logo=googlegemini&logoColor=white" alt="Google Gemini" />
+</p>
+
 - Google Gemini mediante `AiAssistant`
 - AI Proxy opcional para producción
 - Gemini directo únicamente como fallback de desarrollo
 
 ### 🧪 Testing y DevOps
+
+<p>
+  <img src="https://skillicons.dev/icons?i=gradle,github,githubactions" alt="Gradle, GitHub y GitHub Actions" />
+  <img src="https://img.shields.io/badge/JUnit-Testing-25A162?style=flat-square&logo=junit5&logoColor=white" alt="JUnit" />
+  <img src="https://img.shields.io/badge/Robolectric-Android%20Tests-3DDC84?style=flat-square&logo=android&logoColor=white" alt="Robolectric" />
+</p>
 
 - JUnit
 - Robolectric SDK 36
